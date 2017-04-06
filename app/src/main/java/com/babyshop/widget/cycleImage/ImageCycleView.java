@@ -18,7 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * description: 轮播图工具类
+ * auther: an
+ * create: 2017/1/10 11:07
+ * title:  轮播图工具类
+ * description:
  */
 public class ImageCycleView extends LinearLayout {
 
@@ -30,6 +33,11 @@ public class ImageCycleView extends LinearLayout {
      * 图片轮播视图
      */
     private CycleViewPager mBannerPager = null;
+
+    /**
+     * 滚动图片视图适配器
+     */
+    private ImageCycleAdapter mAdvAdapter;
 
     /**
      * 图片轮播指示器控件
@@ -101,12 +109,7 @@ public class ImageCycleView extends LinearLayout {
      * @param
      * @param imageCycleViewListener
      */
-    private ImageCycleViewListener mImageCycleViewListener;
-
-    public void setImageResources(List<Object> cycleImageData, ImageCycleViewListener imageCycleViewListener) {
-
-        mImageCycleViewListener = imageCycleViewListener;
-
+    public void setImageResources(List<ADInfo> cycleImageData, ImageCycleViewListener imageCycleViewListener) {
         // 清除所有子视图
         mGroup.removeAllViews();
         // 图片广告数量
@@ -117,23 +120,26 @@ public class ImageCycleView extends LinearLayout {
             mImageView = new ImageView(mContext);
             int imageParams = (int) (mScale * 20 + 0.5f);// XP与DP转换，适应不同分辨率
             int imagePadding = (int) (mScale * 5 + 0.5f);
-            LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
             layout.setMargins(3, 0, 3, 0);
             mImageView.setLayoutParams(layout);
             mImageView.setPadding(imagePadding, imagePadding, imagePadding, imagePadding);
             mImageViews[i] = mImageView;
+
+
+
             if (i == 0) {
-                mImageViews[i].setBackgroundResource(R.mipmap.icon_banner_select);
-            } else {
                 mImageViews[i].setBackgroundResource(R.mipmap.icon_banner_unselect);
+            } else {
+                mImageViews[i].setBackgroundResource(R.mipmap.icon_banner_select);
             }
             mGroup.addView(mImageViews[i]);
         }
+        mAdvAdapter = new ImageCycleAdapter(mContext, cycleImageData, imageCycleViewListener);
+        mBannerPager.setAdapter(mAdvAdapter);
 
-        mBannerPager.setAdapter(new ImageCycleAdapter(mContext, cycleImageData, mImageCycleViewListener));
 
-        // 自动轮播可在此处启动，也可手动调用
-//        startImageTimerTask();
+        startImageTimerTask();
     }
 
     /**
@@ -204,8 +210,6 @@ public class ImageCycleView extends LinearLayout {
 
         @Override
         public void onPageSelected(int index) {
-            if (mImageCycleViewListener != null)
-                mImageCycleViewListener.onPageSelected(index);
 
             if (index == 0 || index == mImageViews.length + 1) {
                 return;
@@ -224,9 +228,6 @@ public class ImageCycleView extends LinearLayout {
 
     }
 
-    /**
-     * 网络图片适配器
-     */
     private class ImageCycleAdapter extends PagerAdapter {
 
         /**
@@ -237,7 +238,7 @@ public class ImageCycleView extends LinearLayout {
         /**
          * 图片资源列表
          */
-        private List<Object> cycleImageData;
+        private List<ADInfo> cycleImageData;
 
         /**
          * 广告图片点击监听器
@@ -246,7 +247,7 @@ public class ImageCycleView extends LinearLayout {
 
         private Context mContext;
 
-        public ImageCycleAdapter(Context context, List<Object> cycleImage, ImageCycleViewListener imageCycleViewListener) {
+        public ImageCycleAdapter(Context context, List<ADInfo> cycleImage, ImageCycleViewListener imageCycleViewListener) {
             mContext = context;
             cycleImageData = cycleImage;
             mImageCycleViewListener = imageCycleViewListener;
@@ -265,6 +266,9 @@ public class ImageCycleView extends LinearLayout {
 
         @Override
         public Object instantiateItem(ViewGroup container, final int position) {
+            String imageUrl = cycleImageData.get(position).getUrl();
+
+
             ImageView imageView = null;
             if (mImageViewCacheList.isEmpty()) {
                 imageView = new ImageView(mContext);
@@ -280,12 +284,13 @@ public class ImageCycleView extends LinearLayout {
 
                 @Override
                 public void onClick(View v) {
-                    mImageCycleViewListener.onImageClick(position, v);
+                    mImageCycleViewListener.onImageClick(cycleImageData.get(position),position, v);
+
                 }
             });
-            imageView.setTag(cycleImageData.get(position));
+            imageView.setTag(imageUrl);
             container.addView(imageView);
-            mImageCycleViewListener.displayImage(cycleImageData.get(position), imageView);
+            mImageCycleViewListener.displayImage(imageUrl, imageView);
             return imageView;
         }
 
@@ -303,22 +308,22 @@ public class ImageCycleView extends LinearLayout {
      *
      * @author minking
      */
-    public interface ImageCycleViewListener {
+    public static interface ImageCycleViewListener {
 
         /**
-         * 加载网络图片
+         * 加载图片资源
+         *
+         * @param imageURL
+         * @param imageView
          */
-        public void displayImage(Object imageRes, ImageView imageView);
+        public void displayImage(String imageURL, ImageView imageView);
 
         /**
-         * 网络图片单击事件
+         * 单击图片事件
+         *
+         * @param imageView
          */
-        public void onImageClick(int position, View imageView);
-
-        /**
-         * 滑动监听
-         */
-        public void onPageSelected(int index);
+        public void onImageClick(ADInfo dataBean, int postion, View imageView);
     }
 
 }

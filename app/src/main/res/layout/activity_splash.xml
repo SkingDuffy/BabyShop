@@ -16,22 +16,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="160dp"
+        android:layout_marginBottom="200dp"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/app_logo"/>
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:src="@mipmap/app_logo_red"/>
 
         <TextView
             android:id="@+id/tv_app_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="小  飞  马"
-            android:textSize="26sp"/>
+            android:text="小飞马"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/tv_app_desire"
