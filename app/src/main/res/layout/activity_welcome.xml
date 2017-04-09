@@ -5,10 +5,21 @@
     android:layout_height="match_parent"
     tools:context="com.babyshop.ui.WelcomeActivity">
 
-    <com.babyshop.widget.cycleImage.ImageCycleView
+    <android.support.v4.view.ViewPager
         android:id="@+id/vp"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/ll_indicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="40dp"
+        android:orientation="horizontal">
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/bt_enter"
@@ -16,7 +27,8 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="100dp"
+        android:background="@color/colorPrimary"
         android:text="点击体验"
         android:textSize="18sp"
         android:visibility="gone"/>

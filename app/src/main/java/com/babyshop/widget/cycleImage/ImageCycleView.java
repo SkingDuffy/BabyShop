@@ -126,8 +126,6 @@ public class ImageCycleView extends LinearLayout {
             mImageView.setPadding(imagePadding, imagePadding, imagePadding, imagePadding);
             mImageViews[i] = mImageView;
 
-
-
             if (i == 0) {
                 mImageViews[i].setBackgroundResource(R.mipmap.icon_banner_unselect);
             } else {
