@@ -4,8 +4,20 @@
     <color name="colorPrimaryDark">#DF7F7F</color>
     <color name="colorAccent">#FF4081</color>
 
-
-    <color name="white">#ffffff</color>
+    <color name="transparent">#0000</color>
+    <color name="white">#fff</color>
     <color name="pink">#DF7F7F</color>
+    <!--背景色-->
+    <color name="bg_base">#eef0f3</color>
+    <!--黑色字体-->
+    <color name="text_base">#2e4045</color>
+    <!--灰色字体-->
+    <color name="text_grey">#8F9CA4</color>
+    <!--蓝色底色-->
+    <color name="blue_base">#2EC5C2</color>
+    <!--灰色-->
+    <color name="grey_base">#cacaca</color>
+    <!--分割线-->
+    <color name="dividing_line">#EEF0F3</color>
 
 </resources>
