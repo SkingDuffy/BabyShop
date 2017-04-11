@@ -1,4 +1,4 @@
-package com.babyshop.Utils;
+package com.babyshop.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;

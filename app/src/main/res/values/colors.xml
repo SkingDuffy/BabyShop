@@ -6,7 +6,7 @@
 
     <color name="transparent">#0000</color>
     <color name="white">#fff</color>
-    <color name="pink">#DF7F7F</color>
+    <color name="main">#DF7F7F</color>
     <!--背景色-->
     <color name="bg_base">#eef0f3</color>
     <!--黑色字体-->

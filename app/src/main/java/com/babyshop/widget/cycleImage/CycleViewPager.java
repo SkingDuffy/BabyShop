@@ -9,10 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * auther: 祝令峰
- * create: 2017/1/10 11:03
  * title:  轮播图工具类的adapter
- * description:
  */
 public class CycleViewPager extends ViewPager {
 

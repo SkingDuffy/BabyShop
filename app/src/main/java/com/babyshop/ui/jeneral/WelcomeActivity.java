@@ -1,13 +1,15 @@
-package com.babyshop.ui;
+package com.babyshop.ui.jeneral;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.Button;
@@ -15,7 +17,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.babyshop.R;
-import com.babyshop.Utils.SharedPreferencesUtil;
+import com.babyshop.ui.main.HomeActivity;
+import com.babyshop.utils.SharedPreferencesUtil;
 import com.babyshop.commom.Constant;
 
 import java.util.ArrayList;
@@ -34,8 +37,8 @@ public class WelcomeActivity extends AppCompatActivity {
         mContext = this;
         // 是否第一次登陆
         SharedPreferencesUtil sharedUtil = SharedPreferencesUtil.getInstance(this);
-//        boolean isFirst = sharedUtil.getBoolean(Constant.FIRST_LOGIN, true);
-        if (true) {
+        boolean isFirst = sharedUtil.getBoolean(Constant.FIRST_LOGIN, true);
+        if (isFirst) {
             // 进入欢迎页
             sharedUtil.putBoolean(Constant.FIRST_LOGIN, false);
             setContentView(R.layout.activity_welcome);
@@ -52,6 +55,10 @@ public class WelcomeActivity extends AppCompatActivity {
      * 欢迎页轮播
      */
     private void initViewPager() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        }
+
         imageList.add(R.mipmap.splash_2);
         imageList.add(R.mipmap.splash_3);
         imageList.add(R.mipmap.splash_4);
@@ -97,6 +104,11 @@ public class WelcomeActivity extends AppCompatActivity {
      * 启动页
      */
     private void initSplash() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            getWindow().getDecorView().setSystemUiVisibility(View.INVISIBLE);
+        }
+
         View view = findViewById(R.id.view_splash);
         Animation anim = new AlphaAnimation(0.4f, 1.0f);
         anim.setDuration(800);

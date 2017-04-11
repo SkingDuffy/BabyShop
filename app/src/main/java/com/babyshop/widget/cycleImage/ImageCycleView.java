@@ -23,7 +23,7 @@ import java.util.List;
  * title:  轮播图工具类
  * description:
  */
-public class ImageCycleView extends LinearLayout {
+public class ImageCycleView<T extends BaseBannerBean> extends LinearLayout {
 
     /**
      * 上下文
@@ -109,7 +109,7 @@ public class ImageCycleView extends LinearLayout {
      * @param
      * @param imageCycleViewListener
      */
-    public void setImageResources(List<ADInfo> cycleImageData, ImageCycleViewListener imageCycleViewListener) {
+    public void setImageResources(List<T> cycleImageData, ImageCycleViewListener<T> imageCycleViewListener) {
         // 清除所有子视图
         mGroup.removeAllViews();
         // 图片广告数量
@@ -236,16 +236,16 @@ public class ImageCycleView extends LinearLayout {
         /**
          * 图片资源列表
          */
-        private List<ADInfo> cycleImageData;
+        private List<T> cycleImageData;
 
         /**
          * 广告图片点击监听器
          */
-        private ImageCycleViewListener mImageCycleViewListener;
+        private ImageCycleViewListener<T> mImageCycleViewListener;
 
         private Context mContext;
 
-        public ImageCycleAdapter(Context context, List<ADInfo> cycleImage, ImageCycleViewListener imageCycleViewListener) {
+        public ImageCycleAdapter(Context context, List<T> cycleImage, ImageCycleViewListener<T> imageCycleViewListener) {
             mContext = context;
             cycleImageData = cycleImage;
             mImageCycleViewListener = imageCycleViewListener;
@@ -282,11 +282,11 @@ public class ImageCycleView extends LinearLayout {
 
                 @Override
                 public void onClick(View v) {
-                    mImageCycleViewListener.onImageClick(cycleImageData.get(position),position, v);
+                    mImageCycleViewListener.onImageClick(cycleImageData.get(position), position, v);
 
                 }
             });
-            imageView.setTag(imageUrl);
+//            imageView.setTag(imageUrl);   //setTag()与Glide库冲突，故注掉
             container.addView(imageView);
             mImageCycleViewListener.displayImage(imageUrl, imageView);
             return imageView;
@@ -306,7 +306,7 @@ public class ImageCycleView extends LinearLayout {
      *
      * @author minking
      */
-    public static interface ImageCycleViewListener {
+    public interface ImageCycleViewListener<T extends BaseBannerBean> {
 
         /**
          * 加载图片资源
@@ -321,7 +321,7 @@ public class ImageCycleView extends LinearLayout {
          *
          * @param imageView
          */
-        public void onImageClick(ADInfo dataBean, int postion, View imageView);
+        public void onImageClick(T dataBean, int position, View imageView);
     }
 
 }

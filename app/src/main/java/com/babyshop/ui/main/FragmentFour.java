@@ -1,4 +1,4 @@
-package com.babyshop.ui;
+package com.babyshop.ui.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,12 +13,12 @@ import com.babyshop.R;
  * Created by admin on 2017/4/10.
  */
 
-public class FragmentThree extends Fragment {
+public class FragmentFour extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_three, container, false);
+        View view = inflater.inflate(R.layout.fragment_four, container, false);
 
         return view;
     }

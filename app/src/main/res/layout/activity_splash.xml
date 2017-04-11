@@ -40,7 +40,7 @@
             android:layout_marginTop="10dp"
             android:text="关爱母婴 用心呵护"
             android:textSize="14sp"
-            android:textColor="@color/pink"
+            android:textColor="@color/main"
             android:typeface="serif"/>
     </LinearLayout>
 

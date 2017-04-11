@@ -1,20 +1,18 @@
-package com.babyshop.ui;
+package com.babyshop.ui.main;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.WindowManager;
 import android.widget.RadioGroup;
 
 import com.babyshop.R;
+import com.babyshop.commom.BaseActivity;
 
-/**
- * Description:
- * <p> Created by Lucky Feng on 2017/4/6 </p>
- */
-
-public class HomeActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
     private Fragment[] fragments;
     private FragmentOne fragmentOne;
     private FragmentTwo fragmentTwo;
@@ -43,6 +41,7 @@ public class HomeActivity extends AppCompatActivity implements RadioGroup.OnChec
                 .hide(fragmentTwo)
                 .show(fragmentOne)
                 .commit();
+        showFragment(0);    //状态栏颜色
         ((RadioGroup)findViewById(R.id.rg_home)).setOnCheckedChangeListener(this);
     }
 
@@ -68,6 +67,14 @@ public class HomeActivity extends AppCompatActivity implements RadioGroup.OnChec
      *  show fragment by fragIndex
      */
     private void showFragment(int fragIndex) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+            if (fragIndex == 0){
+                getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            } else {
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            }
+        }
+
         if (currentTabIndex != fragIndex) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.hide(fragments[currentTabIndex]);
