@@ -1,6 +1,6 @@
 package com.babyshop.ui.presenter;
 
-import com.babyshop.ui.bean.ResultCommListBean;
+import com.babyshop.ui.bean.ResultCommlistBean;
 import com.babyshop.ui.view.ICommlistView;
 import com.babyshop.utils.MyOkHttpUtils;
 
@@ -18,9 +18,9 @@ public class CommListPresenter {
 
     public void getCommList(String url){
 
-        MyOkHttpUtils.get(url, new MyOkHttpUtils.ResultCallback<ResultCommListBean>() {
+        MyOkHttpUtils.get(url, new MyOkHttpUtils.ResultCallback<ResultCommlistBean>() {
             @Override
-            public void onSuccess(ResultCommListBean response, int action) {
+            public void onSuccess(ResultCommlistBean response, int action) {
                 iCommListView.stopRefresh();
                 iCommListView.getCommList(response.data);
             }

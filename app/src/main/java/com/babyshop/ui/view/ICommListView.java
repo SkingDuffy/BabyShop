@@ -10,8 +10,15 @@ import java.util.List;
 
 public interface ICommlistView {
 
+    /**
+     * 获取商品列表
+     * @param commlist
+     */
     void getCommList(List<GoodsBean> commlist);
 
+    /**
+     * 停止刷新动画
+     */
     void stopRefresh();
 
 }

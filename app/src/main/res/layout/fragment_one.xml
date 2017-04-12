@@ -65,7 +65,7 @@
                 android:background="@color/dividing_line" />
 
             <RelativeLayout
-                android:id="@+id/rl_item_1"
+                android:id="@+id/rl_item_0"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingLeft="14dp"
@@ -104,7 +104,7 @@
                 android:background="@color/dividing_line" />
 
             <RelativeLayout
-                android:id="@+id/rl_item_2"
+                android:id="@+id/rl_item_1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingLeft="14dp"
@@ -143,7 +143,7 @@
                 android:background="@color/dividing_line" />
 
             <RelativeLayout
-                android:id="@+id/rl_item_3"
+                android:id="@+id/rl_item_2"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingLeft="14dp"
@@ -182,7 +182,7 @@
                 android:background="@color/dividing_line" />
 
             <RelativeLayout
-                android:id="@+id/rl_item_4"
+                android:id="@+id/rl_item_3"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingLeft="14dp"
@@ -220,7 +220,7 @@
                 android:background="@color/dividing_line" />
 
             <RelativeLayout
-                android:id="@+id/rl_item_5"
+                android:id="@+id/rl_item_4"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:paddingLeft="14dp"

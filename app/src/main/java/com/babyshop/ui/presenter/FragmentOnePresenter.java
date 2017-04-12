@@ -25,6 +25,10 @@ public class FragmentOnePresenter {
         this.iFragmentOne = iFragmentOne;
     }
 
+    /**
+     * 获取首页轮播资源
+     * @param url
+     */
     public void getBannerRes(String url){
         iFragmentOne.showProgress();
         MyOkHttpUtils.get(url, new MyOkHttpUtils.ResultCallback<ResultBannerBean>() {
@@ -49,9 +53,11 @@ public class FragmentOnePresenter {
     }
 
 
-    public void startActivity(Context c, int item){
-        c.startActivity(new Intent(c, CommodityListActivity.class).putExtra("item", item));
-        Toast.makeText(c, "to item " + item, Toast.LENGTH_SHORT).show();
+    /**
+     * 跳转到商品列表
+     */
+    public void startActivity(Context context, int type){
+        context.startActivity(new Intent(context, CommodityListActivity.class).putExtra("type", type));
     }
 
 }

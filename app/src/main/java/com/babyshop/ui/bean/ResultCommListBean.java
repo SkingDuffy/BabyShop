@@ -6,7 +6,7 @@ import java.util.List;
  * Created by admin on 2017/4/11.
  */
 
-public class ResultCommListBean extends ResultBean {
+public class ResultCommlistBean extends ResultBean {
 
     public List<GoodsBean> data;
 

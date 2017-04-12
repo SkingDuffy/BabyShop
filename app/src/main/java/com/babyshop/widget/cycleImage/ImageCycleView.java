@@ -121,15 +121,15 @@ public class ImageCycleView<T extends BaseBannerBean> extends LinearLayout {
             int imageParams = (int) (mScale * 20 + 0.5f);// XP与DP转换，适应不同分辨率
             int imagePadding = (int) (mScale * 5 + 0.5f);
             LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.WRAP_CONTENT);
-            layout.setMargins(3, 0, 3, 0);
+            layout.setMargins(imagePadding, 0, imagePadding, 0);
             mImageView.setLayoutParams(layout);
             mImageView.setPadding(imagePadding, imagePadding, imagePadding, imagePadding);
             mImageViews[i] = mImageView;
 
             if (i == 0) {
-                mImageViews[i].setBackgroundResource(R.mipmap.icon_banner_unselect);
-            } else {
                 mImageViews[i].setBackgroundResource(R.mipmap.icon_banner_select);
+            } else {
+                mImageViews[i].setBackgroundResource(R.mipmap.icon_banner_unselect);
             }
             mGroup.addView(mImageViews[i]);
         }

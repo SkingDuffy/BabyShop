@@ -45,7 +45,7 @@ public class FragmentOne extends Fragment implements IFragmentOne, View.OnClickL
         vp = (ImageCycleView) view.findViewById(R.id.vp_banner_home);
         mPresenter.getBannerRes(Url.HOME_BANNER);
         // set item click listener
-        int[] itemIds = new int[]{R.id.rl_item_1, R.id.rl_item_2, R.id.rl_item_3, R.id.rl_item_4, R.id.rl_item_5};
+        int[] itemIds = new int[]{R.id.rl_item_0, R.id.rl_item_1, R.id.rl_item_2, R.id.rl_item_3, R.id.rl_item_4};
         for (int i = 0; i < itemIds.length; i++){
             view.findViewById(itemIds[i]).setOnClickListener(this);
         }
@@ -54,19 +54,20 @@ public class FragmentOne extends Fragment implements IFragmentOne, View.OnClickL
 
     @Override
     public void onClick(View view) {
+        int type = 0;
         switch (view.getId()){
-            case R.id.rl_item_1:
-//                mPresenter.startActivity(getActivity(), 0);
-                startActivity(new Intent(getActivity(), CommodityListActivity.class).putExtra("item", 0));
-                Toast.makeText(getActivity(), "to item " + 0, Toast.LENGTH_SHORT).show();
+            case R.id.rl_item_0: type = 0;
                 break;
-
-            case R.id.rl_item_2:
-                startActivity(new Intent(getActivity(), ListActivity.class));
-                Toast.makeText(getActivity(), "to item " + 1, Toast.LENGTH_SHORT).show();
+            case R.id.rl_item_1: type = 1;
                 break;
-
+            case R.id.rl_item_2: type = 2;
+                break;
+            case R.id.rl_item_3: type = 3;
+                break;
+            case R.id.rl_item_4: type = 4;
+                break;
         }
+        mPresenter.startActivity(getActivity(), type);
     }
 
     @Override

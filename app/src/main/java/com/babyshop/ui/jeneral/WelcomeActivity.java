@@ -145,9 +145,9 @@ public class WelcomeActivity extends AppCompatActivity {
             mImageViews[i] = mImageView;
 
             if (i == 0) {
-                mImageViews[i].setBackgroundResource(R.mipmap.icon_banner_unselect);
-            } else {
                 mImageViews[i].setBackgroundResource(R.mipmap.icon_banner_select);
+            } else {
+                mImageViews[i].setBackgroundResource(R.mipmap.icon_banner_unselect);
             }
             mGroup.addView(mImageViews[i]);
         }
