@@ -6,8 +6,8 @@ import java.util.List;
  * Created by admin on 2017/4/11.
  */
 
-public class BannerResultBean extends ResultBean {
+public class ResultCommListBean extends ResultBean {
 
-    public List<BannerToCycleBean> data;
+    public List<GoodsBean> data;
 
 }

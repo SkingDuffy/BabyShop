@@ -1,6 +1,5 @@
 package com.babyshop.ui.view;
 
-import com.babyshop.ui.bean.BannerResultBean;
 import com.babyshop.ui.bean.BannerToCycleBean;
 
 import java.util.List;

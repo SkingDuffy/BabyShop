@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.babyshop.R;
+import com.babyshop.commom.Url;
 import com.babyshop.ui.presenter.FragmentOnePresenter;
 import com.babyshop.ui.view.IFragmentOne;
 import com.babyshop.ui.bean.BannerToCycleBean;
@@ -38,7 +39,7 @@ public class FragmentOne extends Fragment implements IFragmentOne, View.OnClickL
     private void initView(View view) {
         // set banner
         vp = (ImageCycleView) view.findViewById(R.id.vp_banner_home);
-        mPresenter.getBannerRes();
+        mPresenter.getBannerRes(Url.HOME_BANNER);
         // set item click listener
         int[] itemIds = new int[]{R.id.rl_item_1, R.id.rl_item_2, R.id.rl_item_3, R.id.rl_item_4, R.id.rl_item_5};
         for (int i = 0; i < itemIds.length; i++){
@@ -51,7 +52,7 @@ public class FragmentOne extends Fragment implements IFragmentOne, View.OnClickL
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.rl_item_1:
-//                mPresenter.startActivity(getActivity(), );
+                mPresenter.startActivity(getActivity(), 0);
                 break;
 
         }

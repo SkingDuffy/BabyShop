@@ -2,21 +2,14 @@ package com.babyshop.ui.presenter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.provider.Settings;
-import android.util.Log;
 
 import com.babyshop.commom.Url;
+import com.babyshop.ui.jeneral.CommodityListActivity;
 import com.babyshop.ui.view.IFragmentOne;
-import com.babyshop.ui.bean.BannerResultBean;
+import com.babyshop.ui.bean.ResultBannerBean;
 import com.babyshop.ui.bean.BannerToCycleBean;
 import com.babyshop.utils.LLog;
 import com.babyshop.utils.MyOkHttpUtils;
-
-import org.xutils.HttpManager;
-import org.xutils.common.Callback;
-import org.xutils.http.HttpManagerImpl;
-import org.xutils.http.RequestParams;
-import org.xutils.x;
 
 /**
  * Created by admin on 2017/4/11.
@@ -31,11 +24,11 @@ public class FragmentOnePresenter {
         this.iFragmentOne = iFragmentOne;
     }
 
-    public void getBannerRes(){
+    public void getBannerRes(String url){
         iFragmentOne.showProgress();
-        MyOkHttpUtils.get(Url.HOME_BANNER, new MyOkHttpUtils.ResultCallback<BannerResultBean>() {
+        MyOkHttpUtils.get(url, new MyOkHttpUtils.ResultCallback<ResultBannerBean>() {
             @Override
-            public void onSuccess(BannerResultBean response, int action) {
+            public void onSuccess(ResultBannerBean response, int action) {
                 iFragmentOne.dismissProgress();
                 LLog.e(response.data.toString());
                 for (int i = 0; i < response.data.size(); i++){
@@ -56,7 +49,7 @@ public class FragmentOnePresenter {
 
 
     public void startActivity(Context c, int item){
-//        c.startActivity(new Intent(c, cls).putExtra("item", item));
+        c.startActivity(new Intent(c, CommodityListActivity.class).putExtra("item", item));
     }
 
 }

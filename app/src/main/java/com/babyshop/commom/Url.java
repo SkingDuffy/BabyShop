@@ -13,4 +13,7 @@ public class Url {
     //首页轮播
     public static final String HOME_BANNER = BASE + "/commodity/findAdCommodities";
 
+    //商品列表 type:0 限时抢购，1 促销快报，2 新品上架，3 热卖单品，4 推荐品牌
+    public static final String HOME_LIST = BASE + "/commodity/findTypeCommodities";
+
 }
