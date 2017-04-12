@@ -1,5 +1,6 @@
 package com.babyshop.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -7,9 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.babyshop.R;
 import com.babyshop.commom.Url;
+import com.babyshop.ui.jeneral.CommodityListActivity;
+import com.babyshop.ui.jeneral.ListActivity;
 import com.babyshop.ui.presenter.FragmentOnePresenter;
 import com.babyshop.ui.view.IFragmentOne;
 import com.babyshop.ui.bean.BannerToCycleBean;
@@ -52,7 +56,14 @@ public class FragmentOne extends Fragment implements IFragmentOne, View.OnClickL
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.rl_item_1:
-                mPresenter.startActivity(getActivity(), 0);
+//                mPresenter.startActivity(getActivity(), 0);
+                startActivity(new Intent(getActivity(), CommodityListActivity.class).putExtra("item", 0));
+                Toast.makeText(getActivity(), "to item " + 0, Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.rl_item_2:
+                startActivity(new Intent(getActivity(), ListActivity.class));
+                Toast.makeText(getActivity(), "to item " + 1, Toast.LENGTH_SHORT).show();
                 break;
 
         }

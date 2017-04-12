@@ -26,6 +26,9 @@
         <activity android:name=".ui.jeneral.CommodityListActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".ui.jeneral.ListActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

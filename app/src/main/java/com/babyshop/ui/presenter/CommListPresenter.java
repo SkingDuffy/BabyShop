@@ -17,6 +17,7 @@ public class CommListPresenter {
     }
 
     public void getCommList(String url){
+
         MyOkHttpUtils.get(url, new MyOkHttpUtils.ResultCallback<ResultCommListBean>() {
             @Override
             public void onSuccess(ResultCommListBean response, int action) {

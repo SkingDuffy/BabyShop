@@ -2,6 +2,7 @@ package com.babyshop.ui.presenter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.babyshop.commom.Url;
 import com.babyshop.ui.jeneral.CommodityListActivity;
@@ -50,6 +51,7 @@ public class FragmentOnePresenter {
 
     public void startActivity(Context c, int item){
         c.startActivity(new Intent(c, CommodityListActivity.class).putExtra("item", item));
+        Toast.makeText(c, "to item " + item, Toast.LENGTH_SHORT).show();
     }
 
 }

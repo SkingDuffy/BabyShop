@@ -22,7 +22,7 @@ public class BaseActivity extends AppCompatActivity {
      * @param title
      */
     public void initTitleBar(String title){
-        ((TextView)findViewById(R.id.tv_name)).setText(title);
+        ((TextView)findViewById(R.id.tv_title)).setText(title);
         findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
