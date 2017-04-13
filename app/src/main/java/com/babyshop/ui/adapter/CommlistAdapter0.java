@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.babyshop.R;
 import com.babyshop.commom.Url;
 import com.babyshop.ui.bean.GoodsBean;
+import com.babyshop.utils.GlideUtil;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -48,11 +49,7 @@ public class CommlistAdapter0 extends RecyclerView.Adapter<CommlistAdapter0.MyVi
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         GoodsBean bean = commlist.get(position);
-        Glide.with(context)
-                .load(Url.IMG + bean.pic)
-                .placeholder(R.mipmap.img_holder)
-                .error(R.mipmap.img_error)
-                .into(holder.iv);
+        GlideUtil.setRes(context, Url.IMG + bean.pic, holder.iv);
         holder.tv_name.setText(bean.name);
         holder.tv_price.setText(bean.price);
     }

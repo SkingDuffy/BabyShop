@@ -35,12 +35,10 @@ public class FragmentOnePresenter {
             @Override
             public void onSuccess(ResultBannerBean response, int action) {
                 iFragmentOne.dismissProgress();
-                LLog.e(response.data.toString());
                 for (int i = 0; i < response.data.size(); i++){
                     BannerToCycleBean b = response.data.get(i);
                     b.setUrl(Url.IMG + b.pic);
                 }
-                LLog.e(response.data.toString());
                 iFragmentOne.setBannerRes(response.data);
             }
 

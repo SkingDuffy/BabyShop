@@ -8,5 +8,5 @@ public abstract class ResultBean {
     Boolean flag;
     int code;
     String message;
-    String extra;
+//    String extra;
 }
