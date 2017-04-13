@@ -18,5 +18,7 @@ public class Url {
     public static final String CATEGORY = BASE + "/commodity/getCategory";
     //根据关键词或分类id来获取商品列表
     public static final String QUERY_LIST = BASE + "/commodity/getCommoditylist";
+    //根据商品id来获取详细信息
+    public static final String COMMODITY = BASE + "/commodity/getCommodity";
 
 }

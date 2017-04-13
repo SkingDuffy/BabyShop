@@ -21,7 +21,7 @@ import java.util.List;
  * Created by admin on 2017/4/12.
  */
 
-public class SortRightAdapter extends RecyclerView.Adapter<SortRightAdapter.MyHolder> {
+public class SortRightAdapter extends RecyclerView.Adapter<SortRightAdapter.MyHolder> implements View.OnClickListener {
     Context context;
     List<GoodsBean> list;
 
@@ -46,11 +46,21 @@ public class SortRightAdapter extends RecyclerView.Adapter<SortRightAdapter.MyHo
         holder.name.setText(bean.name);
         holder.price.setText("¥" + bean.price);
         GlideUtil.setRes(context, Url.IMG + bean.pic, holder.iv);
+
+        holder.itemView.setTag(bean);
+        holder.itemView.setOnClickListener(this);
     }
 
     @Override
     public int getItemCount() {
         return list.size();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (onItemClickListener != null){
+            onItemClickListener.onItemClick(view, view.getTag());
+        }
     }
 
     class MyHolder extends RecyclerView.ViewHolder{
@@ -62,6 +72,17 @@ public class SortRightAdapter extends RecyclerView.Adapter<SortRightAdapter.MyHo
             this.price = (TextView) view.findViewById(R.id.tv_sort_price);
             this.iv = (ImageView) view.findViewById(R.id.iv_sort_img);
         }
+    }
+
+    private OnItemClickListener onItemClickListener = null;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
+    }
+    /**
+     * 自定义点击监听
+     */
+    public interface OnItemClickListener<T>{
+        void onItemClick(View view, T bean);
     }
 
 }

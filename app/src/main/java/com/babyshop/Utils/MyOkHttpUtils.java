@@ -73,7 +73,7 @@ public class MyOkHttpUtils {
      *
      * @return OkHttpUtils
      */
-    public synchronized static MyOkHttpUtils getmInstance() {
+    private synchronized static MyOkHttpUtils getmInstance() {
         if (mInstance == null) {
             mInstance = new MyOkHttpUtils();
         }

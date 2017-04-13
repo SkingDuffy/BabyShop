@@ -15,7 +15,6 @@ import com.babyshop.ui.view.IFragmentOne;
 import com.babyshop.ui.bean.BannerToCycleBean;
 import com.babyshop.utils.GlideUtil;
 import com.babyshop.widget.cycleImage.ImageCycleView;
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class FragmentOne extends Fragment implements IFragmentOne, View.OnClickL
     private void initView(View view) {
         // set banner
         vp = (ImageCycleView) view.findViewById(R.id.vp_banner_home);
-        mPresenter.getBannerRes(Url.HOME_BANNER);
+        mPresenter.getBannerData(Url.HOME_BANNER);
         // set item click listener
         int[] itemIds = new int[]{R.id.rl_item_0, R.id.rl_item_1, R.id.rl_item_2, R.id.rl_item_3, R.id.rl_item_4};
         for (int i = 0; i < itemIds.length; i++){
@@ -89,7 +88,7 @@ public class FragmentOne extends Fragment implements IFragmentOne, View.OnClickL
 
     @Override
     public void dismissProgress() {
-        mInstance.dismissPorgress();
+        mInstance.dismissProgress();
     }
 
 }

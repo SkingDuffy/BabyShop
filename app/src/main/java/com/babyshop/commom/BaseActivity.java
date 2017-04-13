@@ -19,10 +19,11 @@ public class BaseActivity extends AppCompatActivity {
 
     /**
      * 设置标题栏
+     *
      * @param title
      */
-    public void initTitleBar(String title){
-        ((TextView)findViewById(R.id.tv_title)).setText(title);
+    public void initTitleBar(String title) {
+        ((TextView) findViewById(R.id.tv_title)).setText(title);
         findViewById(R.id.iv_back).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -37,20 +38,23 @@ public class BaseActivity extends AppCompatActivity {
     public void showProgress() {
         showProgress(null);
     }
+
     public void showProgress(String text) {
-        pd = new ProgressDialog(this);
-        if (TextUtils.isEmpty(text)){
+        if (TextUtils.isEmpty(text)) {
             text = "加载中...";
         }
-        pd.setMessage(text);
-        pd.setCanceledOnTouchOutside(false);
+        if (pd == null) {
+            pd = new ProgressDialog(this);
+            pd.setMessage(text);
+            pd.setCanceledOnTouchOutside(false);
+        }
         pd.show();
     }
 
     /**
      * 关闭进度条
      */
-    public void dismissPorgress() {
+    public void dismissProgress() {
         if (pd != null && pd.isShowing()) {
             pd.dismiss();
         }

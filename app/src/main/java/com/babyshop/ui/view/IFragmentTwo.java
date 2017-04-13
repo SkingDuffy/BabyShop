@@ -1,6 +1,5 @@
 package com.babyshop.ui.view;
 
-import com.babyshop.ui.bean.BannerToCycleBean;
 import com.babyshop.ui.bean.GoodsBean;
 import com.babyshop.ui.bean.SortBean;
 
@@ -10,7 +9,7 @@ import java.util.List;
  * Created by admin on 2017/4/11.
  */
 
-public interface IFragmentTwo {
+public interface IFragmentTwo extends IProgressBase {
 
     /**
      * 获取分类目录
@@ -23,8 +22,5 @@ public interface IFragmentTwo {
      * @param response
      */
     void getSortRight(List<GoodsBean> response);
-
-    void showProgress();
-    void dismissProgress();
 
 }

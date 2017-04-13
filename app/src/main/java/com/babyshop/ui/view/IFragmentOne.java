@@ -8,11 +8,8 @@ import java.util.List;
  * Created by admin on 2017/4/11.
  */
 
-public interface IFragmentOne {
+public interface IFragmentOne extends IProgressBase {
 
     void setBannerRes(List<BannerToCycleBean> response);
-
-    void showProgress();
-    void dismissProgress();
 
 }

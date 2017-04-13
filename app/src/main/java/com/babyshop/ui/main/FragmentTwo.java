@@ -1,5 +1,6 @@
 package com.babyshop.ui.main;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -19,6 +20,7 @@ import com.babyshop.ui.adapter.SortLeftAdapter;
 import com.babyshop.ui.adapter.SortRightAdapter;
 import com.babyshop.ui.bean.GoodsBean;
 import com.babyshop.ui.bean.SortBean;
+import com.babyshop.ui.jeneral.CommodityActivity;
 import com.babyshop.ui.presenter.FragmentTwoPresenter;
 import com.babyshop.ui.view.IFragmentTwo;
 import com.babyshop.utils.LLog;
@@ -67,6 +69,14 @@ public class FragmentTwo extends Fragment implements IFragmentTwo {
             public void onItemClick(View view, SortBean bean) {
 //                Toast.makeText(getActivity(), bean.name, Toast.LENGTH_SHORT).show();
                 p.getSortRight(Url.QUERY_LIST + "?categoryid=" + bean.pid);
+            }
+        });
+        // 右边商品点击事件
+        rightAdapter.setOnItemClickListener(new SortRightAdapter.OnItemClickListener<GoodsBean>() {
+            @Override
+            public void onItemClick(View view, GoodsBean bean) {
+                startActivity(new Intent(getActivity(), CommodityActivity.class)
+                        .putExtra("id", bean.id));
             }
         });
     }

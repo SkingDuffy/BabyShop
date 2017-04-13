@@ -29,7 +29,7 @@ public class FragmentOnePresenter {
      * 获取首页轮播资源
      * @param url
      */
-    public void getBannerRes(String url){
+    public void getBannerData(String url){
         iFragmentOne.showProgress();
         MyOkHttpUtils.get(url, new MyOkHttpUtils.ResultCallback<ResultBannerBean>() {
             @Override
