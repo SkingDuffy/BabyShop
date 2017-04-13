@@ -10,6 +10,10 @@ public class Url {
     //图片前缀
     public static final String IMG = BASE;
 
+    //登陆
+    public static final String LOGIN = BASE + "/login";
+    //注册
+    public static final String REGIST = BASE + "/regist";
     //首页轮播
     public static final String HOME_BANNER = BASE + "/commodity/findAdCommodities";
     //商品列表 type:0 限时抢购，1 促销快报，2 新品上架，3 热卖单品，4 推荐品牌
