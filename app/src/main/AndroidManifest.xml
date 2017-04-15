@@ -32,6 +32,9 @@
         <activity android:name=".ui.jeneral.CommodityActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".ui.jeneral.GenerateOrderActivity"
+            android:screenOrientation="portrait" />
+
     </application>
 
 </manifest>

@@ -24,5 +24,11 @@ public class Url {
     public static final String QUERY_LIST = BASE + "/commodity/getCommoditylist";
     //根据商品id来获取详细信息
     public static final String COMMODITY = BASE + "/commodity/getCommodity";
+    //添加到购物车
+    public static final String ADD_CART = BASE + "/commodity/addShoppingcart";
+    //添加到收藏
+    public static final String ADD_COLLECT = BASE + "/commodity/addCollection";
+    //购物车列表
+    public static final String CART_LIST = BASE + "/commodity/getShoppingcart";
 
 }

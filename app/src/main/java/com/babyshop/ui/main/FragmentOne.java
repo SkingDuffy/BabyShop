@@ -15,11 +15,12 @@ import com.babyshop.ui.view.IFragmentOne;
 import com.babyshop.ui.bean.BannerToCycleBean;
 import com.babyshop.utils.GlideUtil;
 import com.babyshop.widget.cycleImage.ImageCycleView;
+import com.jaeger.library.StatusBarUtil;
 
 import java.util.List;
 
 public class FragmentOne extends Fragment implements IFragmentOne, View.OnClickListener {
-    private HomeActivity mInstance;
+    private HomeActivity homeInstance;
     private FragmentOnePresenter mPresenter = new FragmentOnePresenter(this);
     private ImageCycleView vp;
 
@@ -32,7 +33,7 @@ public class FragmentOne extends Fragment implements IFragmentOne, View.OnClickL
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mInstance = (HomeActivity) getActivity();
+        homeInstance = (HomeActivity) getActivity();
         initView(view);
     }
 
@@ -71,7 +72,7 @@ public class FragmentOne extends Fragment implements IFragmentOne, View.OnClickL
         vp.setImageResources(response, new ImageCycleView.ImageCycleViewListener<BannerToCycleBean>() {
             @Override
             public void displayImage(String imageURL, ImageView imageView) {
-                GlideUtil.setRes(getActivity(), imageURL, imageView);
+                GlideUtil.setUrl(getActivity(), imageURL, imageView);
             }
 
             @Override
@@ -83,12 +84,12 @@ public class FragmentOne extends Fragment implements IFragmentOne, View.OnClickL
 
     @Override
     public void showProgress() {
-        mInstance.showProgress();
+        homeInstance.showProgress();
     }
 
     @Override
     public void dismissProgress() {
-        mInstance.dismissProgress();
+        homeInstance.dismissProgress();
     }
 
 }

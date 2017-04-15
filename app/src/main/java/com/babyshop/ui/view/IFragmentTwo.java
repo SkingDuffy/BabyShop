@@ -9,7 +9,7 @@ import java.util.List;
  * Created by admin on 2017/4/11.
  */
 
-public interface IFragmentTwo extends IProgressBase {
+public interface IFragmentTwo extends BaseIProgress {
 
     /**
      * 获取分类目录

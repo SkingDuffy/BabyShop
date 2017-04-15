@@ -9,8 +9,7 @@ public class UserBean {
     public String id;
     public String name;
     public String password;
-    public String userid;
-    public double balances;
+    public String phone;
 
     /*
     * "data":

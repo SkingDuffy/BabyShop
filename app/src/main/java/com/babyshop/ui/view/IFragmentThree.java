@@ -1,6 +1,6 @@
 package com.babyshop.ui.view;
 
-import com.babyshop.ui.bean.GoodsBean;
+import com.babyshop.ui.bean.CartGoodsBean;
 
 import java.util.List;
 
@@ -8,13 +8,12 @@ import java.util.List;
  * Created by admin on 2017/4/11.
  */
 
-public interface ICommlistView extends BaseIProgress {
+public interface IFragmentThree extends BaseIProgress {
 
     /**
      * 获取商品列表
-     * @param commlist
      */
-    void getCommList(List<GoodsBean> commlist);
+    void getCartList(List<CartGoodsBean> cartlist);
 
     /**
      * 停止刷新动画

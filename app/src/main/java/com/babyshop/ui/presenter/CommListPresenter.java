@@ -17,16 +17,18 @@ public class CommListPresenter {
     }
 
     public void getCommList(String url){
-
+        iCommListView.showProgress();
         MyOkHttpUtils.get(url, new MyOkHttpUtils.ResultCallback<ResultCommlistBean>() {
             @Override
             public void onSuccess(ResultCommlistBean response, int action) {
+                iCommListView.dismissProgress();
                 iCommListView.stopRefresh();
                 iCommListView.getCommList(response.data);
             }
 
             @Override
             public void onFailure(Exception e) {
+                iCommListView.dismissProgress();
                 iCommListView.stopRefresh();
             }
         });

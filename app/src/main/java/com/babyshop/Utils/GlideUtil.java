@@ -19,7 +19,7 @@ public class GlideUtil {
      * @param url
      * @param iv
      */
-    public static void setRes(Context context, String url, ImageView iv){
+    public static void setUrl(Context context, String url, ImageView iv){
         Glide.with(context)
                 .load(url)
                 .placeholder(R.mipmap.img_holder)

@@ -5,8 +5,8 @@ package com.babyshop.ui.bean;
  */
 
 public abstract class ResultBean {
-    Boolean flag;
-    int code;
-    String message;
-//    String extra;
+    public Boolean flag;
+    public int code;
+    public String message;
+//    public String extra;
 }

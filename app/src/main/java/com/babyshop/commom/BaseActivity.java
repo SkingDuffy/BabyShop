@@ -6,6 +6,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.babyshop.R;
 
@@ -41,7 +42,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void showProgress(String text) {
         if (TextUtils.isEmpty(text)) {
-            text = "加载中...";
+            text = "Loading.....";
         }
         if (pd == null) {
             pd = new ProgressDialog(this);
@@ -58,6 +59,13 @@ public class BaseActivity extends AppCompatActivity {
         if (pd != null && pd.isShowing()) {
             pd.dismiss();
         }
+    }
+
+    /**
+     * Toast
+     */
+    public void showToast(String msg){
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
 }

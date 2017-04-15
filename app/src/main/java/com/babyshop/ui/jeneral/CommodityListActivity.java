@@ -24,11 +24,11 @@ import java.util.List;
 
 public class CommodityListActivity extends BaseActivity implements ICommlistView, SwipeRefreshLayout.OnRefreshListener {
 
-    CommListPresenter p = new CommListPresenter(this);
-    SwipeRefreshLayout swipeRefresh;
-    RecyclerView rv;
-    RecyclerView.Adapter adapter;
-    List<GoodsBean> commlist = new ArrayList<>();
+    private CommListPresenter p = new CommListPresenter(this);
+    private SwipeRefreshLayout swipeRefresh;
+    private RecyclerView rv;
+    private RecyclerView.Adapter adapter;
+    private List<GoodsBean> commlist = new ArrayList<>();
     //当前页
     private int start = 1;
     //商品列表 type:0 限时抢购，1 促销快报，2 新品上架，3 热卖单品，4 推荐品牌

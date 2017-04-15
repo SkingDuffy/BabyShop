@@ -3,6 +3,8 @@ package com.babyshop.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.babyshop.commom.Constant;
+
 public class SharedPreferencesUtil {
 
     private static SharedPreferencesUtil spUtil = null;
@@ -12,9 +14,18 @@ public class SharedPreferencesUtil {
         sp = ctx.getSharedPreferences("babyShop", ctx.MODE_PRIVATE);
     }
 
-    public static SharedPreferencesUtil getInstance(Context ctx) {
+    public static synchronized void init(Context cxt){
+        if(spUtil == null){
+            spUtil = new SharedPreferencesUtil(cxt);
+        }
+    }
+
+    /**
+     * get instance of PreferenceManager
+     */
+    public synchronized static SharedPreferencesUtil getInstance() {
         if (spUtil == null) {
-            spUtil = new SharedPreferencesUtil(ctx);
+            throw new RuntimeException("please init first!");
         }
         return spUtil;
     }
@@ -112,5 +123,29 @@ public class SharedPreferencesUtil {
             editor.commit();
         }
     }
+
+/*---------------------------以下常用字段---------------------------*/
+
+    /**
+     * 判断用户是否登陆
+     */
+    public boolean hasLogin(){
+        return getBoolean(Constant.HAS_LOGIN, false);
+    }
+
+    /**
+     * use id
+     */
+    public String getUserId(){
+        return getString(Constant.U_ID, "");
+    }
+
+    /**
+     * use name
+     */
+    public String getUserName(){
+        return getString(Constant.U_NAME, "");
+    }
+
 
 }

@@ -2,6 +2,8 @@ package com.babyshop.ui;
 
 import android.app.Application;
 
+import com.babyshop.utils.SharedPreferencesUtil;
+
 import org.xutils.x;
 
 
@@ -14,6 +16,10 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        x.Ext.init(this);
+        // init XUtils
+//        x.Ext.init(this);
+
+        SharedPreferencesUtil.init(this);
+
     }
 }

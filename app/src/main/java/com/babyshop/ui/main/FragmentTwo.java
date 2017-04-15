@@ -24,6 +24,7 @@ import com.babyshop.ui.jeneral.CommodityActivity;
 import com.babyshop.ui.presenter.FragmentTwoPresenter;
 import com.babyshop.ui.view.IFragmentTwo;
 import com.babyshop.utils.LLog;
+import com.jaeger.library.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;

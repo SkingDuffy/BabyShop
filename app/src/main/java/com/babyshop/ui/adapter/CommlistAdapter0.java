@@ -5,7 +5,6 @@ package com.babyshop.ui.adapter;
  */
 
 import android.content.Context;
-import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,7 +16,6 @@ import com.babyshop.R;
 import com.babyshop.commom.Url;
 import com.babyshop.ui.bean.GoodsBean;
 import com.babyshop.utils.GlideUtil;
-import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -49,7 +47,7 @@ public class CommlistAdapter0 extends RecyclerView.Adapter<CommlistAdapter0.MyVi
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         GoodsBean bean = commlist.get(position);
-        GlideUtil.setRes(context, Url.IMG + bean.pic, holder.iv);
+        GlideUtil.setUrl(context, Url.IMG + bean.pic, holder.iv);
         holder.tv_name.setText(bean.name);
         holder.tv_price.setText(bean.price);
     }

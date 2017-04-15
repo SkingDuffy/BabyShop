@@ -3,7 +3,6 @@ package com.babyshop.ui.jeneral;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.annotation.StringDef;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,11 +10,13 @@ import android.widget.TextView;
 
 import com.babyshop.R;
 import com.babyshop.commom.BaseActivity;
+import com.babyshop.commom.Constant;
 import com.babyshop.commom.Url;
 import com.babyshop.ui.bean.GoodsBean;
 import com.babyshop.ui.presenter.CommPresenter;
 import com.babyshop.ui.view.ICommView;
 import com.babyshop.utils.GlideUtil;
+import com.babyshop.utils.SharedPreferencesUtil;
 import com.babyshop.widget.cycleImage.BaseBannerBean;
 import com.babyshop.widget.cycleImage.ImageCycleView;
 
@@ -28,7 +29,7 @@ import java.util.List;
 
 public class CommodityActivity extends BaseActivity implements ICommView {
 
-    private CommPresenter p = new CommPresenter(this);
+    private CommPresenter p;
     private ImageCycleView imageCycleView;
     private TextView tv_name, tv_id, tv_price, tv_descri;
     private String id, userid;
@@ -38,14 +39,17 @@ public class CommodityActivity extends BaseActivity implements ICommView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comm);
         initTitleBar("单品详情");
-        initIntent();
+        initParams();
         initView();
     }
 
-    private void initIntent() {
+    private void initParams() {
+        SharedPreferencesUtil shared = SharedPreferencesUtil.getInstance();
+        p = new CommPresenter(this, shared);
+
         Intent i = getIntent();
         id = i.getStringExtra("id");
-        userid = i.getStringExtra("userid");
+        userid = shared.getString(Constant.U_ID, "");
     }
 
     private void initView() {
@@ -54,9 +58,7 @@ public class CommodityActivity extends BaseActivity implements ICommView {
         tv_id = (TextView) findViewById(R.id.tv_comm_id);
         tv_price = (TextView) findViewById(R.id.tv_comm_price);
         tv_descri = (TextView) findViewById(R.id.tv_comm_description);
-        // TODO: 参数待调整
-//        String suffix = TextUtils.isEmpty(userid) ? "?id=" + id : "?id=" + id + "&userid=" + userid;
-        String suffix = "?id=" + id + "&userid=" + 1;
+        String suffix = TextUtils.isEmpty(userid) ? "?id=" + id : "?id=" + id + "&userid=" + userid;
         p.getComm(Url.COMMODITY + suffix);
     }
 
@@ -66,10 +68,10 @@ public class CommodityActivity extends BaseActivity implements ICommView {
         tv_id.setText("商品编号：" + bean.id);
         tv_price.setText("¥" + bean.price);
         tv_descri.setText(bean.describe);
-        imageCycleView.setImageResources(getBannerList(bean), new ImageCycleView.ImageCycleViewListener() {
+        imageCycleView.setImageResources(p.getBannerList(bean), new ImageCycleView.ImageCycleViewListener() {
             @Override
             public void displayImage(String imageURL, ImageView imageView) {
-                GlideUtil.setRes(CommodityActivity.this, imageURL, imageView);
+                GlideUtil.setUrl(CommodityActivity.this, imageURL, imageView);
             }
 
             @Override
@@ -79,13 +81,21 @@ public class CommodityActivity extends BaseActivity implements ICommView {
     }
 
     /**
-     * 将数据转换成轮播bean模型
+     * 加入购物车
      */
-    private List<BaseBannerBean> getBannerList(GoodsBean bean){
-        List<BaseBannerBean> bannerList = new ArrayList<>();
-        BaseBannerBean b1 = new BaseBannerBean();
-        b1.setUrl(Url.IMG + bean.pic);
-        bannerList.add(b1);
-        return bannerList;
+    public void clickPutIntoCart(View v) {
+        p.putIntoCart(id, "1");
+    }
+
+    /**
+     * 收藏
+     */
+    public void clickCollect(View v) {
+        p.collect(id);
+    }
+
+    @Override
+    public void toLoginActivity() {
+        startActivity(new Intent(this, LoginActivity.class));
     }
 }

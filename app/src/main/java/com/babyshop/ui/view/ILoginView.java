@@ -6,9 +6,9 @@ import com.babyshop.ui.bean.UserBean;
  * Created by admin on 2017/4/13.
  */
 
-public interface ILoginView extends IProgressBase {
+public interface ILoginView extends BaseIProgress, BaseIToast {
 
-    void loginResponse(UserBean userBean);
+    void loginSuccess(UserBean userBean);
 
     void registerResponse(String url);
 

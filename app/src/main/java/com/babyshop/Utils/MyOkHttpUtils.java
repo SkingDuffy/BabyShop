@@ -2,6 +2,8 @@ package com.babyshop.utils;
 
 import android.os.Handler;
 import android.os.Looper;
+import android.util.ArrayMap;
+import android.util.SparseArray;
 
 import com.google.gson.internal.$Gson$Types;
 
@@ -9,7 +11,11 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
@@ -324,8 +330,12 @@ public class MyOkHttpUtils {
      * @param callback 请求回调
      * @param params   请求参数
      */
-    public static void post(String url, List<Param> params, final ResultCallback callback) {
-        getmInstance().postRequest(url, callback, params, 0);
+    public static void post(String url, Map<String, String> params, final ResultCallback callback) {
+        List<Param> p = new ArrayList<>();
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            p.add(new Param(entry.getKey(), entry.getValue()));
+        }
+        getmInstance().postRequest(url, callback, p, 0);
     }
 
     /**

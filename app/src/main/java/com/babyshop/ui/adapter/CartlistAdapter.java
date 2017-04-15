@@ -6,12 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.babyshop.R;
 import com.babyshop.commom.Url;
+import com.babyshop.ui.bean.CartGoodsBean;
 import com.babyshop.ui.bean.GoodsBean;
 import com.babyshop.utils.GlideUtil;
+import com.babyshop.utils.LLog;
 
 import java.util.List;
 
@@ -19,28 +23,28 @@ import java.util.List;
  * Created by admin on 2017/4/12.
  */
 
-public class SortRightAdapter extends RecyclerView.Adapter<SortRightAdapter.MyHolder> implements View.OnClickListener {
+public class CartlistAdapter extends RecyclerView.Adapter<CartlistAdapter.MyHolder> implements View.OnClickListener {
     Context context;
-    List<GoodsBean> list;
+    List<CartGoodsBean> list;
 
-    public SortRightAdapter(Context context, List<GoodsBean> list) {
+    public CartlistAdapter(Context context, List<CartGoodsBean> list) {
         this.context = context;
         this.list = list;
     }
 
-    public void setData(List<GoodsBean> list){
+    public void setData(List<CartGoodsBean> list){
         this.list = list;
         notifyDataSetChanged();
     }
 
     @Override
     public MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MyHolder(LayoutInflater.from(context).inflate(R.layout.item_sort_right, parent, false));
+        return new MyHolder(LayoutInflater.from(context).inflate(R.layout.item_cartlist, parent, false));
     }
 
     @Override
     public void onBindViewHolder(MyHolder holder, int position) {
-        GoodsBean bean = list.get(position);
+        CartGoodsBean bean = list.get(position);
         holder.name.setText(bean.name);
         holder.price.setText("¥" + bean.price);
         GlideUtil.setUrl(context, Url.IMG + bean.pic, holder.iv);
@@ -64,11 +68,13 @@ public class SortRightAdapter extends RecyclerView.Adapter<SortRightAdapter.MyHo
     class MyHolder extends RecyclerView.ViewHolder{
         TextView name, price;
         ImageView iv;
+        LinearLayout rl;
         public MyHolder(View view) {
             super(view);
-            this.name = (TextView) view.findViewById(R.id.tv_sort_name);
-            this.price = (TextView) view.findViewById(R.id.tv_sort_price);
-            this.iv = (ImageView) view.findViewById(R.id.iv_sort_img);
+            this.name = (TextView) view.findViewById(R.id.tv_cart_name);
+            this.price = (TextView) view.findViewById(R.id.tv_cart_price);
+            this.iv = (ImageView) view.findViewById(R.id.iv_img);
+            this.rl = (LinearLayout) view.findViewById(R.id.rl_cart_dele);
         }
     }
 

@@ -36,7 +36,7 @@ public class WelcomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mContext = this;
         // 是否第一次登陆
-        SharedPreferencesUtil sharedUtil = SharedPreferencesUtil.getInstance(this);
+        SharedPreferencesUtil sharedUtil = SharedPreferencesUtil.getInstance();
         boolean isFirst = sharedUtil.getBoolean(Constant.FIRST_LOGIN, true);
         if (isFirst) {
             // 进入欢迎页

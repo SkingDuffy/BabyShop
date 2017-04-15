@@ -1,18 +1,27 @@
 package com.babyshop.ui.main;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.RadioGroup;
 
 import com.babyshop.R;
 import com.babyshop.commom.BaseActivity;
+import com.babyshop.ui.jeneral.LoginActivity;
+import com.babyshop.ui.presenter.HomePresenter;
+import com.babyshop.ui.view.IHomeView;
+import com.jaeger.library.StatusBarUtil;
 
-public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
+public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, IHomeView {
+    private HomePresenter p = new HomePresenter(this);
     private Fragment[] fragments;
     private FragmentOne fragmentOne;
     private FragmentTwo fragmentTwo;
@@ -34,7 +43,7 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         fragmentTwo = new FragmentTwo();
         fragmentThree = new FragmentThree();
         fragmentFour = new FragmentFour();
-        fragments = new Fragment[] {fragmentOne, fragmentTwo, fragmentThree, fragmentFour};
+        fragments = new Fragment[]{fragmentOne, fragmentTwo, fragmentThree, fragmentFour};
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fl_home, fragmentOne)
                 .add(R.id.fl_home, fragmentTwo)
@@ -42,12 +51,12 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 .show(fragmentOne)
                 .commit();
         showFragment(0);    //状态栏颜色
-        ((RadioGroup)findViewById(R.id.rg_home)).setOnCheckedChangeListener(this);
+        ((RadioGroup) findViewById(R.id.rg_home)).setOnCheckedChangeListener(this);
     }
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
-        switch(checkedId){
+        switch (checkedId) {
             case R.id.rb_home:
                 showFragment(0);
                 break;
@@ -64,11 +73,11 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     }
 
     /**
-     *  show fragment by fragIndex
+     * show fragment by fragIndex
      */
     private void showFragment(int fragIndex) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
-            if (fragIndex == 0){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            if (fragIndex == 0) {
                 getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             } else {
                 getWindow().clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -78,11 +87,17 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         if (currentTabIndex != fragIndex) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.hide(fragments[currentTabIndex]);
-            if (!fragments[fragIndex].isAdded()){
+            if (!fragments[fragIndex].isAdded()) {
                 ft.add(R.id.fl_home, fragments[fragIndex]);
             }
             ft.show(fragments[fragIndex]).commit();
         }
         currentTabIndex = fragIndex;
     }
+
+    @Override
+    public void toLoginActivity() {
+        startActivity(new Intent(this, LoginActivity.class));
+    }
+
 }

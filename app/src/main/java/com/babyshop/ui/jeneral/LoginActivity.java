@@ -17,6 +17,7 @@ import com.babyshop.commom.Url;
 import com.babyshop.ui.bean.UserBean;
 import com.babyshop.ui.presenter.LoginPresenter;
 import com.babyshop.ui.view.ILoginView;
+import com.babyshop.utils.SharedPreferencesUtil;
 
 /**
  * Created by admin on 2017/4/13.
@@ -38,6 +39,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     private void initView() {
         et_name = (EditText) findViewById(R.id.et_username);
         et_pwd = (EditText) findViewById(R.id.et_password);
+        String u_name = SharedPreferencesUtil.getInstance().getUserName();
+        if (!TextUtils.isEmpty(u_name)){
+            et_name.setText(u_name);
+            et_pwd.setFocusable(true);
+            et_pwd.requestFocus();
+        }
         iv_name = (ImageView) findViewById(R.id.iv_username);
         iv_pwd = (ImageView) findViewById(R.id.iv_password);
         dele_name = (ImageView) findViewById(R.id.iv_dele_username);
@@ -91,7 +98,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     /**
      * 登陆事件
      */
-    public void userLogin(View v){
+    public void clickLogin(View v){
         String name = et_name.getText().toString().trim();
         String pwd = et_pwd.getText().toString().trim();
         if (TextUtils.isEmpty(name)) {
@@ -112,12 +119,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     /**
      * 注册事件
      */
-    public void userRegister(View v){
+    public void clickRegister(View v){
 
     }
 
     @Override
-    public void loginResponse(UserBean userBean) {
+    public void loginSuccess(UserBean userBean) {
+        setResult(RESULT_OK);
         finish();
     }
 
@@ -125,4 +133,5 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
     public void registerResponse(String url) {
 
     }
+
 }
