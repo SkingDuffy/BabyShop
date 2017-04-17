@@ -16,14 +16,14 @@ public class RefreshBiz {
      * 实现RecyclerView分页加载
      * @param mRecyclerView
      */
-    public void setRecyclerMore(final RecyclerView mRecyclerView, final OnRecyclerLoadMoreListener l) {
+    public void setOnRecyclerLoadMoreListener(final RecyclerView mRecyclerView, final OnRecyclerLoadMoreListener l) {
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE &&
                         lastPositionItem == mRecyclerView.getAdapter().getItemCount() - 1) {
-                    l.recyclerLoadMore();
+                    l.onLoadMore();
                 }
             }
 
@@ -37,7 +37,7 @@ public class RefreshBiz {
     }
 
     public interface OnRecyclerLoadMoreListener {
-        void recyclerLoadMore();
+        void onLoadMore();
     }
 
 

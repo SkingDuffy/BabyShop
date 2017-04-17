@@ -44,8 +44,8 @@ public class CommListPresenter {
         refreshBiz.setRefreshColor(swipeRefresh);
     }
 
-    public void setLoadMore(RecyclerView mRecyclerView, RefreshBiz.OnRecyclerLoadMoreListener l){
-        refreshBiz.setRecyclerMore(mRecyclerView, l);
+    public void setOnRecyclerLoadMoreListener(RecyclerView mRecyclerView, RefreshBiz.OnRecyclerLoadMoreListener l){
+        refreshBiz.setOnRecyclerLoadMoreListener(mRecyclerView, l);
     }
 
 }

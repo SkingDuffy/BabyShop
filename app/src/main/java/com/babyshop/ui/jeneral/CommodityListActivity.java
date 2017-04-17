@@ -87,7 +87,7 @@ public class CommodityListActivity extends BaseActivity implements ICommlistView
                         .putExtra("id", bean.id));
             }
         });
-        p.setLoadMore(rv, this);
+        p.setOnRecyclerLoadMoreListener(rv, this);
         swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
         p.setRefreshColor(swipeRefresh);
         swipeRefresh.setOnRefreshListener(this);
@@ -130,7 +130,7 @@ public class CommodityListActivity extends BaseActivity implements ICommlistView
      * 分页加载RecyclerView
      */
     @Override
-    public void recyclerLoadMore() {
+    public void onLoadMore() {
         String url = Url.HOME_LIST +
                 "?type=" + type +
                 "&start=" + (++start) +
