@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * 商品列表适配器（限时抢购）
  */
-public class CommlistAdapter0 extends RecyclerView.Adapter<CommlistAdapter0.MyViewHolder> {
+public class CommlistAdapter0 extends BaseRecyclerAdapter<CommlistAdapter0.MyViewHolder> {
     Context context;
     List<GoodsBean> commlist;
 
@@ -38,10 +38,7 @@ public class CommlistAdapter0 extends RecyclerView.Adapter<CommlistAdapter0.MyVi
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MyViewHolder holder = new MyViewHolder(LayoutInflater.from(
-                context).inflate(R.layout.item_commlist0, parent,
-                false));
-        return holder;
+        return new MyViewHolder(LayoutInflater.from(context).inflate(R.layout.item_commlist0, parent,false));
     }
 
     @Override
@@ -49,7 +46,8 @@ public class CommlistAdapter0 extends RecyclerView.Adapter<CommlistAdapter0.MyVi
         GoodsBean bean = commlist.get(position);
         GlideUtil.setUrl(context, Url.IMG + bean.pic, holder.iv);
         holder.tv_name.setText(bean.name);
-        holder.tv_price.setText(bean.price);
+        holder.tv_price.setText("¥" + bean.price);
+        initItemClick(holder, bean);
     }
 
     @Override

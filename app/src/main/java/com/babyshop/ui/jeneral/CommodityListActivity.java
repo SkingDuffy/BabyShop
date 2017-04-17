@@ -1,17 +1,22 @@
 package com.babyshop.ui.jeneral;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.babyshop.R;
 import com.babyshop.commom.BaseActivity;
 import com.babyshop.commom.Url;
+import com.babyshop.ui.adapter.BaseRecyclerAdapter;
 import com.babyshop.ui.adapter.CommlistAdapter0;
 import com.babyshop.ui.adapter.CommlistAdapter1;
+import com.babyshop.ui.adapter.OnItemClickListener;
 import com.babyshop.ui.bean.GoodsBean;
+import com.babyshop.ui.biz.RefreshBiz;
 import com.babyshop.ui.presenter.CommListPresenter;
 import com.babyshop.ui.view.ICommlistView;
 
@@ -22,12 +27,12 @@ import java.util.List;
  * Created by admin on 2017/4/11.
  */
 
-public class CommodityListActivity extends BaseActivity implements ICommlistView, SwipeRefreshLayout.OnRefreshListener {
+public class CommodityListActivity extends BaseActivity implements ICommlistView, SwipeRefreshLayout.OnRefreshListener, RefreshBiz.OnRecyclerLoadMoreListener {
 
     private CommListPresenter p = new CommListPresenter(this);
     private SwipeRefreshLayout swipeRefresh;
     private RecyclerView rv;
-    private RecyclerView.Adapter adapter;
+    private BaseRecyclerAdapter adapter;
     private List<GoodsBean> commlist = new ArrayList<>();
     //当前页
     private int start = 1;
@@ -75,10 +80,16 @@ public class CommodityListActivity extends BaseActivity implements ICommlistView
         }
         rv.setAdapter(adapter);
         onRefresh();
-        setRecyclerMore(rv);
+        adapter.setOnItemClickListener(new OnItemClickListener<GoodsBean>() {
+            @Override
+            public void onItemClick(View view, GoodsBean bean) {
+                startActivity(new Intent(CommodityListActivity.this, CommodityActivity.class)
+                        .putExtra("id", bean.id));
+            }
+        });
+        p.setLoadMore(rv, this);
         swipeRefresh = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
-        swipeRefresh.setColorSchemeResources(android.R.color.holo_blue_bright, android.R.color.holo_green_light,
-                android.R.color.holo_orange_light, android.R.color.holo_red_light);
+        p.setRefreshColor(swipeRefresh);
         swipeRefresh.setOnRefreshListener(this);
     }
 
@@ -115,43 +126,15 @@ public class CommodityListActivity extends BaseActivity implements ICommlistView
         swipeRefresh.setRefreshing(false);
     }
 
-
-    private int lastPositionItem;
-    /**
-     * 设置RecyclerView 控件
-     * 实现RecyclerView分页加载
-     * @param mRecyclerView
-     */
-    public void setRecyclerMore(RecyclerView mRecyclerView) {
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                if (newState == RecyclerView.SCROLL_STATE_IDLE &&
-                        lastPositionItem == adapter.getItemCount() - 1) {
-                    loadRecyclerMore();
-                }
-            }
-
-            @Override
-            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                super.onScrolled(recyclerView, dx, dy);
-                RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
-                lastPositionItem = ((LinearLayoutManager) layoutManager).findLastVisibleItemPosition();
-            }
-        });
-    }
-
     /**
      * 分页加载RecyclerView
      */
-    private void loadRecyclerMore() {
+    @Override
+    public void recyclerLoadMore() {
         String url = Url.HOME_LIST +
                 "?type=" + type +
                 "&start=" + (++start) +
                 "&size=" + SIZE;
         p.getCommList(url);
     }
-
-
 }

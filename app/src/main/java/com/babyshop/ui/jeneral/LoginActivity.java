@@ -2,7 +2,6 @@ package com.babyshop.ui.jeneral;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -125,7 +124,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void loginSuccess(UserBean userBean) {
-        setResult(RESULT_OK);
         finish();
     }
 

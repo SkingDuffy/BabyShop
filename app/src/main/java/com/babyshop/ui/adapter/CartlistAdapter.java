@@ -7,15 +7,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.babyshop.R;
 import com.babyshop.commom.Url;
 import com.babyshop.ui.bean.CartGoodsBean;
-import com.babyshop.ui.bean.GoodsBean;
 import com.babyshop.utils.GlideUtil;
-import com.babyshop.utils.LLog;
 
 import java.util.List;
 
@@ -23,7 +20,7 @@ import java.util.List;
  * Created by admin on 2017/4/12.
  */
 
-public class CartlistAdapter extends RecyclerView.Adapter<CartlistAdapter.MyHolder> implements View.OnClickListener {
+public class CartlistAdapter extends BaseRecyclerAdapter<CartlistAdapter.MyHolder> {
     Context context;
     List<CartGoodsBean> list;
 
@@ -32,7 +29,7 @@ public class CartlistAdapter extends RecyclerView.Adapter<CartlistAdapter.MyHold
         this.list = list;
     }
 
-    public void setData(List<CartGoodsBean> list){
+    public void setData(List<CartGoodsBean> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -48,9 +45,7 @@ public class CartlistAdapter extends RecyclerView.Adapter<CartlistAdapter.MyHold
         holder.name.setText(bean.name);
         holder.price.setText("¥" + bean.price);
         GlideUtil.setUrl(context, Url.IMG + bean.pic, holder.iv);
-
-        holder.itemView.setTag(bean);
-        holder.itemView.setOnClickListener(this);
+        initItemClick(holder, bean);
     }
 
     @Override
@@ -58,17 +53,11 @@ public class CartlistAdapter extends RecyclerView.Adapter<CartlistAdapter.MyHold
         return list.size();
     }
 
-    @Override
-    public void onClick(View view) {
-        if (onItemClickListener != null){
-            onItemClickListener.onItemClick(view, view.getTag());
-        }
-    }
-
-    class MyHolder extends RecyclerView.ViewHolder{
+    class MyHolder extends RecyclerView.ViewHolder {
         TextView name, price;
         ImageView iv;
         LinearLayout rl;
+
         public MyHolder(View view) {
             super(view);
             this.name = (TextView) view.findViewById(R.id.tv_cart_name);
@@ -78,15 +67,5 @@ public class CartlistAdapter extends RecyclerView.Adapter<CartlistAdapter.MyHold
         }
     }
 
-    private OnItemClickListener onItemClickListener = null;
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
-        this.onItemClickListener = onItemClickListener;
-    }
-    /**
-     * 自定义点击监听
-     */
-    public interface OnItemClickListener<T>{
-        void onItemClick(View view, T bean);
-    }
 
 }

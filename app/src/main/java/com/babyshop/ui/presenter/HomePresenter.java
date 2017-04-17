@@ -15,12 +15,12 @@ public class HomePresenter {
         this.iHomeView = iHomeView;
     }
 
-    public boolean hasLogin() {
+    public boolean isToLogin() {
         if (SharedPreferencesUtil.getInstance().hasLogin()) {
-            return true;
+            return false;
         } else {
             iHomeView.toLoginActivity();
-            return false;
+            return true;
         }
     }
 

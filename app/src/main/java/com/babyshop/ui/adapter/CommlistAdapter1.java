@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * 商品列表适配器（其他模块）
  */
-public class CommlistAdapter1 extends RecyclerView.Adapter<CommlistAdapter1.MyViewHolder> {
+public class CommlistAdapter1 extends BaseRecyclerAdapter<CommlistAdapter1.MyViewHolder> {
     Context context;
     List<GoodsBean> commlist;
 
@@ -49,7 +49,8 @@ public class CommlistAdapter1 extends RecyclerView.Adapter<CommlistAdapter1.MyVi
         GoodsBean bean = commlist.get(position);
         GlideUtil.setUrl(context, Url.IMG + bean.pic, holder.iv);
         holder.tv_name.setText(bean.name);
-        holder.tv_price.setText(bean.price);
+        holder.tv_price.setText("¥" + bean.price);
+        initItemClick(holder, bean);
     }
 
     @Override

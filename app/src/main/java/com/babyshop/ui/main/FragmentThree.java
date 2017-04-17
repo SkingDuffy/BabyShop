@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +13,12 @@ import android.view.ViewGroup;
 import com.babyshop.R;
 import com.babyshop.commom.Url;
 import com.babyshop.ui.adapter.CartlistAdapter;
+import com.babyshop.ui.adapter.OnItemClickListener;
 import com.babyshop.ui.bean.CartGoodsBean;
+import com.babyshop.ui.jeneral.CommodityActivity;
 import com.babyshop.ui.jeneral.GenerateOrderActivity;
-import com.babyshop.ui.jeneral.LoginActivity;
 import com.babyshop.ui.presenter.FragmentThreePresenter;
 import com.babyshop.ui.view.IFragmentThree;
-import com.babyshop.utils.LLog;
 import com.babyshop.utils.SharedPreferencesUtil;
 import com.babyshop.widget.FullyLinearLayoutManager;
 
@@ -38,7 +37,6 @@ public class FragmentThree extends Fragment implements IFragmentThree, SwipeRefr
     private RecyclerView rv;
     private CartlistAdapter adapter;
     private List<CartGoodsBean> cartlist = new ArrayList<>();
-//    private String userid;
     private SharedPreferencesUtil shared = SharedPreferencesUtil.getInstance();
 
     @Nullable
@@ -55,18 +53,22 @@ public class FragmentThree extends Fragment implements IFragmentThree, SwipeRefr
     }
 
     private void initView(View view) {
-        swipeRefresh = p.initSwipeRefresh(view, R.id.swipe_layout);
+        swipeRefresh = (SwipeRefreshLayout) view.findViewById(R.id.swipe_layout);
+        p.setRefreshColor(swipeRefresh);
         swipeRefresh.setOnRefreshListener(this);
         rv = (RecyclerView) view.findViewById(R.id.rv_cartlist);
         rv.setLayoutManager(new FullyLinearLayoutManager(getActivity()));
         rv.setNestedScrollingEnabled(false);
         adapter = new CartlistAdapter(getActivity(), cartlist);
         rv.setAdapter(adapter);
-        if (shared.hasLogin()){
-            onRefresh();
-        } else {
-            startActivityForResult(new Intent(getActivity(), LoginActivity.class), 0);
-        }
+        onRefresh();
+        adapter.setOnItemClickListener(new OnItemClickListener<CartGoodsBean>() {
+            @Override
+            public void onItemClick(View view, CartGoodsBean bean) {
+                startActivity(new Intent(getActivity(), CommodityActivity.class)
+                        .putExtra("id", bean.id));
+            }
+        });
         view.findViewById(R.id.bt_settlement).setOnClickListener(this);
     }
 
@@ -105,11 +107,4 @@ public class FragmentThree extends Fragment implements IFragmentThree, SwipeRefr
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == getActivity().RESULT_OK){
-            onRefresh();
-        }
-    }
 }

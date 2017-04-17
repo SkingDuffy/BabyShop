@@ -3,13 +3,11 @@ package com.babyshop.ui.main;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AppCompatActivity;
+import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.RadioGroup;
 
@@ -18,7 +16,6 @@ import com.babyshop.commom.BaseActivity;
 import com.babyshop.ui.jeneral.LoginActivity;
 import com.babyshop.ui.presenter.HomePresenter;
 import com.babyshop.ui.view.IHomeView;
-import com.jaeger.library.StatusBarUtil;
 
 public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, IHomeView {
     private HomePresenter p = new HomePresenter(this);
@@ -52,6 +49,17 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 .commit();
         showFragment(0);    //状态栏颜色
         ((RadioGroup) findViewById(R.id.rg_home)).setOnCheckedChangeListener(this);
+        findViewById(R.id.rb_cart).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+
+                switch (motionEvent.getAction()){
+                    case MotionEvent.ACTION_DOWN:
+                        return p.isToLogin();
+                }
+                return false;
+            }
+        });
     }
 
     @Override

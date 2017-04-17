@@ -1,6 +1,10 @@
 package com.babyshop.ui.presenter;
 
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
+
 import com.babyshop.ui.bean.ResultCommlistBean;
+import com.babyshop.ui.biz.RefreshBiz;
 import com.babyshop.ui.view.ICommlistView;
 import com.babyshop.utils.MyOkHttpUtils;
 
@@ -11,9 +15,11 @@ import com.babyshop.utils.MyOkHttpUtils;
 public class CommListPresenter {
 
     ICommlistView iCommListView;
+    RefreshBiz refreshBiz;
 
     public CommListPresenter(ICommlistView iCommListView) {
         this.iCommListView = iCommListView;
+        refreshBiz = new RefreshBiz();
     }
 
     public void getCommList(String url){
@@ -32,6 +38,14 @@ public class CommListPresenter {
                 iCommListView.stopRefresh();
             }
         });
+    }
+
+    public void setRefreshColor(SwipeRefreshLayout swipeRefresh){
+        refreshBiz.setRefreshColor(swipeRefresh);
+    }
+
+    public void setLoadMore(RecyclerView mRecyclerView, RefreshBiz.OnRecyclerLoadMoreListener l){
+        refreshBiz.setRecyclerMore(mRecyclerView, l);
     }
 
 }

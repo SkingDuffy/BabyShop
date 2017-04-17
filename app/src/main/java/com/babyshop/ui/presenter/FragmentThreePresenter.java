@@ -1,14 +1,11 @@
 package com.babyshop.ui.presenter;
 
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
 
 import com.babyshop.ui.bean.ResultCartlist;
 import com.babyshop.ui.biz.RefreshBiz;
 import com.babyshop.ui.view.IFragmentThree;
 import com.babyshop.utils.MyOkHttpUtils;
-import com.babyshop.utils.SharedPreferencesUtil;
 
 /**
  * Created by admin on 2017/4/14.
@@ -17,7 +14,6 @@ import com.babyshop.utils.SharedPreferencesUtil;
 public class FragmentThreePresenter {
 
     IFragmentThree iFragmentThree;
-
     RefreshBiz refreshBiz;
 
     public FragmentThreePresenter(IFragmentThree iFragmentThree) {
@@ -43,12 +39,8 @@ public class FragmentThreePresenter {
         });
     }
 
-    public SwipeRefreshLayout initSwipeRefresh(View view, int res){
-        return new RefreshBiz().init(view, res);
-    }
-
-    public void setLoadMore(RecyclerView mRecyclerView, RefreshBiz.LoadRecyclerMoreListener l){
-        refreshBiz.setRecyclerMore(mRecyclerView, l);
+    public void setRefreshColor(SwipeRefreshLayout swipeRefresh){
+        refreshBiz.setRefreshColor(swipeRefresh);
     }
 
 }

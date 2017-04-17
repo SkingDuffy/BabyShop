@@ -7,15 +7,13 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
-import android.widget.Toast;
 
 import com.babyshop.R;
 import com.babyshop.commom.Url;
+import com.babyshop.ui.adapter.OnItemClickListener;
 import com.babyshop.ui.adapter.SortLeftAdapter;
 import com.babyshop.ui.adapter.SortRightAdapter;
 import com.babyshop.ui.bean.GoodsBean;
@@ -73,7 +71,7 @@ public class FragmentTwo extends Fragment implements IFragmentTwo {
             }
         });
         // 右边商品点击事件
-        rightAdapter.setOnItemClickListener(new SortRightAdapter.OnItemClickListener<GoodsBean>() {
+        rightAdapter.setOnItemClickListener(new OnItemClickListener<GoodsBean>() {
             @Override
             public void onItemClick(View view, GoodsBean bean) {
                 startActivity(new Intent(getActivity(), CommodityActivity.class)
