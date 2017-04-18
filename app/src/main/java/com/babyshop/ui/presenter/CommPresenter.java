@@ -7,6 +7,8 @@ import com.babyshop.commom.Url;
 import com.babyshop.ui.bean.GoodsBean;
 import com.babyshop.ui.bean.ResultBean;
 import com.babyshop.ui.bean.ResultCommBean;
+import com.babyshop.ui.bean.TestResultBean;
+import com.babyshop.ui.biz.ToLoginBiz;
 import com.babyshop.ui.view.ICommView;
 import com.babyshop.utils.MyOkHttpUtils;
 import com.babyshop.utils.SharedPreferencesUtil;
@@ -26,10 +28,12 @@ public class CommPresenter {
 
     ICommView iCommView;
     SharedPreferencesUtil shared;
+    ToLoginBiz toLoginBiz;
 
     public CommPresenter(ICommView iCommView, SharedPreferencesUtil shared) {
         this.iCommView = iCommView;
         this.shared = shared;
+        toLoginBiz = new ToLoginBiz();
     }
 
     /**
@@ -67,18 +71,21 @@ public class CommPresenter {
         httpPostBiz(id, "");
     }
 
-    private void httpPostBiz(String id, String num){
-        if (!SharedPreferencesUtil.getInstance().hasLogin()) {
-            iCommView.toLoginActivity();
+    private void httpPostBiz(String id, String num) {
+        if (toLoginBiz.isToLogin(iCommView))
             return;
-        }
+        String url = "";
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
-        if (num != "")
-            params.put("num", num);
         params.put("userid", shared.getUserId());
+        if (!TextUtils.isEmpty(num)) {
+            params.put("num", num);
+            url = Url.ADD_CART;
+        } else {
+            url = Url.ADD_COLLECT;
+        }
         iCommView.showProgress();
-        MyOkHttpUtils.post(Url.ADD_CART, params, new MyOkHttpUtils.ResultCallback<ResultBean>() {
+        MyOkHttpUtils.post(url, params, new MyOkHttpUtils.ResultCallback<ResultBean>() {
             @Override
             public void onSuccess(ResultBean response, int action) {
                 iCommView.dismissProgress();

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.babyshop.ui.jeneral.CommodityActivity;
 import com.babyshop.ui.jeneral.GenerateOrderActivity;
 import com.babyshop.ui.presenter.FragmentThreePresenter;
 import com.babyshop.ui.view.IFragmentThree;
+import com.babyshop.utils.LLog;
 import com.babyshop.utils.SharedPreferencesUtil;
 import com.babyshop.widget.FullyLinearLayoutManager;
 
@@ -37,7 +39,6 @@ public class FragmentThree extends Fragment implements IFragmentThree, SwipeRefr
     private RecyclerView rv;
     private CartlistAdapter adapter;
     private List<CartGoodsBean> cartlist = new ArrayList<>();
-    private SharedPreferencesUtil shared = SharedPreferencesUtil.getInstance();
 
     @Nullable
     @Override
@@ -57,7 +58,7 @@ public class FragmentThree extends Fragment implements IFragmentThree, SwipeRefr
         p.setRefreshColor(swipeRefresh);
         swipeRefresh.setOnRefreshListener(this);
         rv = (RecyclerView) view.findViewById(R.id.rv_cartlist);
-        rv.setLayoutManager(new FullyLinearLayoutManager(getActivity()));
+        rv.setLayoutManager(new LinearLayoutManager(getActivity()));
         rv.setNestedScrollingEnabled(false);
         adapter = new CartlistAdapter(getActivity(), cartlist);
         rv.setAdapter(adapter);
@@ -74,18 +75,23 @@ public class FragmentThree extends Fragment implements IFragmentThree, SwipeRefr
 
     @Override
     public void onRefresh() {
-        String url = Url.CART_LIST + "?userid=" + shared.getUserId();
-        p.getCommList(url);
+        p.getCartList();
     }
 
     @Override
     public void getCartList(List<CartGoodsBean> cartlist) {
+        this.cartlist = cartlist;
         adapter.setData(cartlist);
     }
 
     @Override
     public void stopRefresh() {
         swipeRefresh.setRefreshing(false);
+    }
+
+    @Override
+    public void toGenerateOrderActivity() {
+        startActivity(new Intent(getActivity(), GenerateOrderActivity.class));
     }
 
     @Override
@@ -102,9 +108,11 @@ public class FragmentThree extends Fragment implements IFragmentThree, SwipeRefr
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.bt_settlement:
-                startActivity(new Intent(getActivity(), GenerateOrderActivity.class));
+                p.settlement(cartlist);
                 break;
         }
     }
+
+
 
 }

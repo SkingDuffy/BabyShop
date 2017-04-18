@@ -20,4 +20,6 @@ public interface IFragmentThree extends BaseIProgress {
      */
     void stopRefresh();
 
+    void toGenerateOrderActivity();
+
 }

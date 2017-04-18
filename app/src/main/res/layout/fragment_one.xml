@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/iv_item_1"
+                    android:layout_toRightOf="@id/iv_item_1"
                     android:text="限时抢购"
                     android:textColor="@color/main"
                     android:textSize="16sp" />
@@ -123,7 +123,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/iv_item_2"
+                    android:layout_toRightOf="@id/iv_item_2"
                     android:text="促销快报"
                     android:textColor="@color/main"
                     android:textSize="16sp" />
@@ -162,7 +162,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/iv_item_3"
+                    android:layout_toRightOf="@id/iv_item_3"
                     android:text="新品上架"
                     android:textColor="@color/main"
                     android:textSize="16sp" />
@@ -201,7 +201,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/iv_item_4"
+                    android:layout_toRightOf="@id/iv_item_4"
                     android:text="热卖单品"
                     android:textColor="@color/main"
                     android:textSize="16sp" />
@@ -239,7 +239,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="8dp"
-                    android:layout_toRightOf="@+id/iv_item_5"
+                    android:layout_toRightOf="@id/iv_item_5"
                     android:text="推荐品牌"
                     android:textColor="@color/main"
                     android:textSize="16sp" />

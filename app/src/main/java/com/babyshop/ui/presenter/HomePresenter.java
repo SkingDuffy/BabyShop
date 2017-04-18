@@ -1,7 +1,7 @@
 package com.babyshop.ui.presenter;
 
+import com.babyshop.ui.biz.ToLoginBiz;
 import com.babyshop.ui.view.IHomeView;
-import com.babyshop.utils.SharedPreferencesUtil;
 
 /**
  * Created by admin on 2017/4/14.
@@ -10,18 +10,15 @@ import com.babyshop.utils.SharedPreferencesUtil;
 public class HomePresenter {
 
     IHomeView iHomeView;
+    ToLoginBiz toLoginBiz;
 
     public HomePresenter(IHomeView iHomeView) {
         this.iHomeView = iHomeView;
+        toLoginBiz = new ToLoginBiz();
     }
 
     public boolean isToLogin() {
-        if (SharedPreferencesUtil.getInstance().hasLogin()) {
-            return false;
-        } else {
-            iHomeView.toLoginActivity();
-            return true;
-        }
+        return toLoginBiz.isToLogin(iHomeView);
     }
 
 }

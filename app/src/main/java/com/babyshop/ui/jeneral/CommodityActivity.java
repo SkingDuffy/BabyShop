@@ -98,4 +98,5 @@ public class CommodityActivity extends BaseActivity implements ICommView {
     public void toLoginActivity() {
         startActivity(new Intent(this, LoginActivity.class));
     }
+
 }

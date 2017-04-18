@@ -1,5 +1,6 @@
 package com.babyshop.ui.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 
 import com.babyshop.R;
 import com.babyshop.commom.Url;
+import com.babyshop.ui.jeneral.CommodityActivity;
 import com.babyshop.ui.presenter.FragmentOnePresenter;
 import com.babyshop.ui.view.IFragmentOne;
 import com.babyshop.ui.bean.BannerToCycleBean;
@@ -77,7 +79,7 @@ public class FragmentOne extends Fragment implements IFragmentOne, View.OnClickL
 
             @Override
             public void onImageClick(BannerToCycleBean dataBean, int position, View imageView) {
-
+                startActivity(new Intent(getActivity(), CommodityActivity.class).putExtra("id", dataBean.id));
             }
         });
     }

@@ -6,10 +6,8 @@ import com.babyshop.ui.bean.GoodsBean;
  * Created by admin on 2017/4/13.
  */
 
-public interface ICommView extends BaseIProgress, BaseIToast {
+public interface ICommView extends BaseIProgress, BaseIToast, BaseIToLogin {
 
     void getComm(GoodsBean bean);
-
-    void toLoginActivity();
 
 }

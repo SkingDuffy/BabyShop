@@ -1,5 +1,6 @@
 package com.babyshop.ui.jeneral;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.Editable;
@@ -14,8 +15,10 @@ import com.babyshop.R;
 import com.babyshop.commom.BaseActivity;
 import com.babyshop.commom.Url;
 import com.babyshop.ui.bean.UserBean;
+import com.babyshop.ui.main.HomeActivity;
 import com.babyshop.ui.presenter.LoginPresenter;
 import com.babyshop.ui.view.ILoginView;
+import com.babyshop.utils.LLog;
 import com.babyshop.utils.SharedPreferencesUtil;
 
 /**
@@ -124,6 +127,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
 
     @Override
     public void loginSuccess(UserBean userBean) {
+        setResult(RESULT_OK, new Intent(this, HomeActivity.class));
         finish();
     }
 

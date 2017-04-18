@@ -12,6 +12,7 @@ public class Constant {
     public static final String U_ID = "u_id";
     // 用户手机号
     public static final String U_PHONE = "u_phone";
-
+    // 用户地址
+    public static final String U_ADDRESS = "u_address";
 
 }

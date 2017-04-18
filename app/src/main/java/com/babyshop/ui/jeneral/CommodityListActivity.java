@@ -19,6 +19,7 @@ import com.babyshop.ui.bean.GoodsBean;
 import com.babyshop.ui.biz.RefreshBiz;
 import com.babyshop.ui.presenter.CommListPresenter;
 import com.babyshop.ui.view.ICommlistView;
+import com.babyshop.utils.SharedPreferencesUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +37,7 @@ public class CommodityListActivity extends BaseActivity implements ICommlistView
     private List<GoodsBean> commlist = new ArrayList<>();
     //当前页
     private int start = 1;
-    //商品列表 type:0 限时抢购，1 促销快报，2 新品上架，3 热卖单品，4 推荐品牌
+    //商品列表 type:0 限时抢购，1 促销快报，2 新品上架，3 热卖单品，4 推荐品牌，，5 浏览历史，6 收藏列表
     private int type = 0;
     //每页获取的商品数量
     private final int SIZE = 8;
@@ -54,26 +55,13 @@ public class CommodityListActivity extends BaseActivity implements ICommlistView
      */
     private void initIntent() {
         type = getIntent().getIntExtra("type", 0);
-        String title = "";
-        switch (type){
-            case 0: title = "限时抢购";
-                break;
-            case 1: title = "促销快报";
-                break;
-            case 2: title = "新品上架";
-                break;
-            case 3: title = "热卖单品";
-                break;
-            case 4: title = "推荐品牌";
-                break;
-        }
-        initTitleBar(title);
+        initTitleBar(p.initTitle(type));
     }
 
     private void initView() {
         rv = (RecyclerView) findViewById(R.id.rv_commlist);
         rv.setLayoutManager(new LinearLayoutManager(this));
-        if (type == 0){
+        if (type == 0) {
             adapter = new CommlistAdapter0(this, commlist);
         } else {
             adapter = new CommlistAdapter1(this, commlist);
@@ -99,25 +87,21 @@ public class CommodityListActivity extends BaseActivity implements ICommlistView
     @Override
     public void onRefresh() {
         start = 1;
-        String url = Url.HOME_LIST +
-                "?type=" + type +
-                "&start=" + start +
-                "&size=" + SIZE;
-        p.getCommList(url);
+        p.getCommList(type, start, SIZE);
     }
 
     @Override
     public void getCommList(List<GoodsBean> commlist) {
         //将网络获取的数据添加到缓存列表中
-        if (start == 1){
+        if (start == 1) {
             this.commlist = commlist;
         } else {
             this.commlist.addAll(commlist);
         }
-        if (type == 0){
-            ((CommlistAdapter0)adapter).setData(this.commlist);
+        if (type == 0) {
+            ((CommlistAdapter0) adapter).setData(this.commlist);
         } else {
-            ((CommlistAdapter1)adapter).setData(this.commlist);
+            ((CommlistAdapter1) adapter).setData(this.commlist);
         }
     }
 
@@ -131,10 +115,6 @@ public class CommodityListActivity extends BaseActivity implements ICommlistView
      */
     @Override
     public void onLoadMore() {
-        String url = Url.HOME_LIST +
-                "?type=" + type +
-                "&start=" + (++start) +
-                "&size=" + SIZE;
-        p.getCommList(url);
+        p.getCommList(type, start, SIZE);
     }
 }

@@ -30,5 +30,13 @@ public class Url {
     public static final String ADD_COLLECT = BASE + "/commodity/addCollection";
     //购物车列表
     public static final String CART_LIST = BASE + "/commodity/getShoppingcart";
+    //购物车结算 - 添加订单
+    public static final String SETTLEMENT_CART = BASE + "/order/addOrder";
+    //订单列表
+    public static final String MY_ORDER = BASE + "/order/getOrderList";
+    //浏览历史
+    public static final String MY_HISTORY = BASE + "/commodity/getUserCommodity";
+    //收藏列表
+    public static final String MY_COLLECT = BASE + "/commodity/getCollection";
 
 }

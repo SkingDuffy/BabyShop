@@ -16,6 +16,7 @@ import com.babyshop.commom.BaseActivity;
 import com.babyshop.ui.jeneral.LoginActivity;
 import com.babyshop.ui.presenter.HomePresenter;
 import com.babyshop.ui.view.IHomeView;
+import com.babyshop.utils.LLog;
 
 public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, IHomeView {
     private HomePresenter p = new HomePresenter(this);
@@ -43,8 +44,8 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         fragments = new Fragment[]{fragmentOne, fragmentTwo, fragmentThree, fragmentFour};
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fl_home, fragmentOne)
-                .add(R.id.fl_home, fragmentTwo)
-                .hide(fragmentTwo)
+                .add(R.id.fl_home, fragmentFour)
+                .hide(fragmentFour)
                 .show(fragmentOne)
                 .commit();
         showFragment(0);    //状态栏颜色

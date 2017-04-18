@@ -2,8 +2,6 @@ package com.babyshop.utils;
 
 import android.os.Handler;
 import android.os.Looper;
-import android.util.ArrayMap;
-import android.util.SparseArray;
 
 import com.google.gson.internal.$Gson$Types;
 
@@ -12,8 +10,6 @@ import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -345,8 +341,8 @@ public class MyOkHttpUtils {
      * @param callback 请求回调
      * @param json     请求json
      */
-    public static void postString(String url, String json, int action, final ResultCallback callback) {
-        getmInstance().postStringRequest(url, callback, json, action);
+    public static void postString(String url, String json, final ResultCallback callback) {
+        getmInstance().postStringRequest(url, callback, json, 0);
     }
 
     /**
@@ -356,8 +352,8 @@ public class MyOkHttpUtils {
      * @param callback 请求回调
      * @param filePath 请求file
      */
-    public static void postFile(String url, String filePath, int action, final ResultCallback callback) {
-        getmInstance().postFileRequest(url, callback, filePath, action);
+    public static void postFile(String url, String filePath, final ResultCallback callback) {
+        getmInstance().postFileRequest(url, callback, filePath, 0);
 
     }
 
