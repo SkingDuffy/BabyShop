@@ -28,12 +28,16 @@ public class Url {
     public static final String ADD_CART = BASE + "/commodity/addShoppingcart";
     //购物车列表
     public static final String CART_LIST = BASE + "/commodity/getShoppingcart";
+    //从购物车删除
+    public static final String DEL_CART = BASE + "/commodity/deleteShopCat";
     //购物车结算 - 添加订单
     public static final String SETTLEMENT_CART = BASE + "/order/addOrder";
     //订单列表
     public static final String MY_ORDER = BASE + "/order/getOrderList";
-    //浏览历史
+    //浏览记录
     public static final String MY_HISTORY = BASE + "/commodity/getUserCommodity";
+    //删除记录
+    public static final String DEL_HISTORY = BASE + "/commodity/deletelooks";
     //添加到收藏
     public static final String ADD_COLLECT = BASE + "/commodity/addCollection";
     //取消收藏

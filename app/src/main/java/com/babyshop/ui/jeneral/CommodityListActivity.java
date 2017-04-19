@@ -7,6 +7,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.babyshop.R;
 import com.babyshop.commom.BaseActivity;
@@ -18,7 +19,9 @@ import com.babyshop.ui.adapter.OnItemClickListener;
 import com.babyshop.ui.bean.GoodsBean;
 import com.babyshop.ui.biz.RefreshBiz;
 import com.babyshop.ui.presenter.CommListPresenter;
+import com.babyshop.ui.presenter.HistoryPresenter;
 import com.babyshop.ui.view.ICommlistView;
+import com.babyshop.ui.view.IHistoryView;
 import com.babyshop.utils.SharedPreferencesUtil;
 
 import java.util.ArrayList;
@@ -28,7 +31,7 @@ import java.util.List;
  * Created by admin on 2017/4/11.
  */
 
-public class CommodityListActivity extends BaseActivity implements ICommlistView, SwipeRefreshLayout.OnRefreshListener, RefreshBiz.OnRecyclerLoadMoreListener {
+public class CommodityListActivity extends BaseActivity implements ICommlistView, IHistoryView, SwipeRefreshLayout.OnRefreshListener, RefreshBiz.OnRecyclerLoadMoreListener {
 
     private CommListPresenter p = new CommListPresenter(this);
     private SwipeRefreshLayout swipeRefresh;
@@ -56,6 +59,17 @@ public class CommodityListActivity extends BaseActivity implements ICommlistView
     private void initIntent() {
         type = getIntent().getIntExtra("type", 0);
         initTitleBar(p.initTitle(type));
+        if (type == 5){
+            final HistoryPresenter pp = new HistoryPresenter(this);
+            TextView tv_right = (TextView) findViewById(R.id.tv_title_right);
+            tv_right.setVisibility(View.VISIBLE);
+            tv_right.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    pp.delHistory();
+                }
+            });
+        }
     }
 
     private void initView() {
@@ -116,5 +130,13 @@ public class CommodityListActivity extends BaseActivity implements ICommlistView
     @Override
     public void onLoadMore() {
         p.getCommList(type, start, SIZE);
+    }
+
+    /**
+     * 删除浏览历史
+     */
+    @Override
+    public void onDelSuccess() {
+        onRefresh();
     }
 }

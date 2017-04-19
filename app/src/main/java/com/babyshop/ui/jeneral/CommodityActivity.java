@@ -14,6 +14,7 @@ import com.babyshop.commom.BaseActivity;
 import com.babyshop.commom.Constant;
 import com.babyshop.commom.Url;
 import com.babyshop.ui.bean.GoodsBean;
+import com.babyshop.ui.main.FragmentThree;
 import com.babyshop.ui.presenter.CommPresenter;
 import com.babyshop.ui.view.ICommView;
 import com.babyshop.utils.GlideUtil;
@@ -88,17 +89,34 @@ public class CommodityActivity extends BaseActivity implements ICommView {
         p.putIntoCart("1");
     }
 
+    @Override
+    public void onAddCartSuccess() {
+        if (FragmentThree.mfragmentThree != null)
+            FragmentThree.mfragmentThree.onRefresh();
+    }
+
     /**
      * 收藏
      */
     public void clickCollect(View v) {
-        if (hasCollect){
+        bt_collect.setClickable(false);
+        p.collect(hasCollect);
+    }
+
+    @Override
+    public void onCollectSuccess() {
+        bt_collect.setClickable(true);
+        hasCollect = !hasCollect;
+        if (hasCollect) {
             bt_collect.setText("取消收藏");
         } else {
             bt_collect.setText("收藏");
         }
-        hasCollect = !hasCollect;
-        p.collect(hasCollect);
+    }
+
+    @Override
+    public void onCollectFailure() {
+        bt_collect.setClickable(true);
     }
 
     @Override

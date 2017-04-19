@@ -58,7 +58,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:text="1"
+                            android:text="--"
                             android:textColor="@color/main"
                             android:textSize="16sp" />
 
@@ -78,10 +78,11 @@
                             android:textSize="16sp" />
 
                         <TextView
+                            android:id="@+id/tv_score_cart"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:text="8分"
+                            android:text="--"
                             android:textColor="@color/main"
                             android:textSize="16sp" />
 
@@ -105,7 +106,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
-                            android:text="¥99"
+                            android:text="--"
                             android:textColor="@color/main"
                             android:textSize="16sp" />
 

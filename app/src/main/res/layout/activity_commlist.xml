@@ -5,7 +5,25 @@
     android:background="@color/bg_base"
     android:orientation="vertical">
 
-    <include layout="@layout/title_bar" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp">
+
+        <include layout="@layout/title_bar" />
+
+        <TextView
+            android:id="@+id/tv_title_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:padding="12dp"
+            android:text="删除所有"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:id="@+id/swipe_layout"

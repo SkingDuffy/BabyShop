@@ -54,6 +54,7 @@ public class CommPresenter {
             @Override
             public void onFailure(Exception e) {
                 iCommView.dismissProgress();
+
             }
         });
     }
@@ -79,7 +80,7 @@ public class CommPresenter {
 
     }
 
-    private void httpPostBiz(int type, Map<String, String> map) {
+    private void httpPostBiz(final int type, Map<String, String> map) {
         if (toLoginBiz.isToLogin(iCommView))
             return;
         String url = "";
@@ -105,12 +106,25 @@ public class CommPresenter {
             public void onSuccess(ResultBean response, int action) {
                 iCommView.dismissProgress();
                 iCommView.showToast(response.message);
+                if (type == 1){
+                    if (response.flag)
+                        iCommView.onAddCartSuccess();
+                } else  {
+                    if (response.flag) {
+                        iCommView.onCollectSuccess();
+                    } else {
+                        iCommView.onCollectFailure();
+                    }
+                }
             }
 
             @Override
             public void onFailure(Exception e) {
                 iCommView.dismissProgress();
                 iCommView.showToast(e.toString());
+                if (type != 1) {
+                    iCommView.onCollectFailure();
+                }
             }
         });
     }

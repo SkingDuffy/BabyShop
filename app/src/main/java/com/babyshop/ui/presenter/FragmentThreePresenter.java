@@ -4,15 +4,15 @@ import android.support.v4.widget.SwipeRefreshLayout;
 
 import com.babyshop.commom.Url;
 import com.babyshop.ui.bean.CartGoodsBean;
+import com.babyshop.ui.bean.OrderBean;
+import com.babyshop.ui.bean.ResultAddOrder;
+import com.babyshop.ui.bean.ResultBean;
 import com.babyshop.ui.bean.ResultCartlist;
 import com.babyshop.ui.biz.RefreshBiz;
 import com.babyshop.ui.view.IFragmentThree;
-import com.babyshop.utils.GsonUtil;
-import com.babyshop.utils.LLog;
 import com.babyshop.utils.MyOkHttpUtils;
 import com.babyshop.utils.SharedPreferencesUtil;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -56,25 +56,29 @@ public class FragmentThreePresenter {
     }
 
     public void settlement(List<CartGoodsBean> cartlist){
-        List<ParamsSubBean> paramsList = new ArrayList<>();
-        for (CartGoodsBean bean : cartlist){
-            paramsList.add(new ParamsSubBean(bean.id, bean.num, bean.price));
+        if (cartlist.size() == 0){
+            iFragmentThree.showToast("请往购物车里添点东西");
+            return;
         }
-        ParamsBean paramsBean = new ParamsBean(shared.getUserId(), paramsList);
-        String paramsBody = GsonUtil.getInstance().bean2Json(paramsBean);
-        LLog.e("---------- paramsBody = " + paramsBody);
-
-//        Map<String, String> params = new HashMap<>();
-//        params.put("userid", shared.getUserId());
-//        params.put("commodities", commodities);
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < cartlist.size(); i++){
+            sb.append(cartlist.get(i).shopCardId);
+            if (i != cartlist.size()-1)
+                sb.append(",");
+        }
+        Map<String, String> params = new HashMap<>();
+        params.put("userid", shared.getUserId());
+        params.put("ids", sb.toString());
         iFragmentThree.showProgress();
-        MyOkHttpUtils.postString(Url.SETTLEMENT_CART, paramsBody, new MyOkHttpUtils.ResultCallback<ResultCartlist>() {
+        MyOkHttpUtils.post(Url.SETTLEMENT_CART, params, new MyOkHttpUtils.ResultCallback<ResultAddOrder>() {
             @Override
-            public void onSuccess(ResultCartlist response, int action) {
+            public void onSuccess(ResultAddOrder response, int action) {
                 iFragmentThree.dismissProgress();
                 iFragmentThree.stopRefresh();
-                LLog.e("----------- onSuccess ==========");
-                iFragmentThree.toGenerateOrderActivity();
+                iFragmentThree.showToast(response.message);
+                if (response.flag){
+                    iFragmentThree.onAddOrderSuccess(response.data);
+                }
             }
 
             @Override
@@ -85,26 +89,60 @@ public class FragmentThreePresenter {
         });
     }
 
-    class ParamsBean {
-        String userid;
-        List<ParamsSubBean> commodities;
+    public void delByCartId(String cartId){
+        iFragmentThree.showProgress();
+        Map<String, String> params = new HashMap<>();
+        params.put("userid", shared.getUserId());
+        params.put("id", cartId);
+        MyOkHttpUtils.post(Url.DEL_CART, params,new MyOkHttpUtils.ResultCallback<ResultBean>() {
+            @Override
+            public void onSuccess(ResultBean response, int action) {
+                iFragmentThree.dismissProgress();
+                iFragmentThree.stopRefresh();
+                iFragmentThree.showToast(response.message);
+                if (response.flag)
+                    iFragmentThree.onDelSuccess();
+            }
 
-        public ParamsBean(String userid, List<ParamsSubBean> commodities) {
-            this.userid = userid;
-            this.commodities = commodities;
-        }
+            @Override
+            public void onFailure(Exception e) {
+                iFragmentThree.dismissProgress();
+                iFragmentThree.stopRefresh();
+            }
+        });
     }
 
-    class ParamsSubBean {
-        String id;
-        String num;
-        String price;
-
-        public ParamsSubBean(String id, String num, String price) {
-            this.id = id;
-            this.num = num;
-            this.price = price;
+    /**
+     * 计算总数
+     */
+    public int getTotalNum(List<CartGoodsBean> list){
+        int total = 0;
+        for (CartGoodsBean bean : list){
+            total += Integer.valueOf(bean.num);
         }
+        return total;
+    }
+
+    /**
+     * 计算总价
+     */
+    public String getTotalPrice(List<CartGoodsBean> list){
+        Float total = 0f;
+        for (CartGoodsBean bean : list){
+            total += Float.valueOf(bean.price) * Integer.valueOf(bean.num);
+        }
+        return String.format("%.2f", total);
+    }
+
+    /**
+     * 生成bean模型
+     */
+    public OrderBean getOrderBean (String orderId, List<CartGoodsBean> list){
+        OrderBean orderBean = new OrderBean();
+        orderBean.id = orderId;
+        orderBean.commodities = list;
+        orderBean.totalprice = getTotalPrice(list);
+        return orderBean;
     }
 
 }

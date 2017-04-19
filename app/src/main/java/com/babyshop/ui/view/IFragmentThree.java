@@ -8,7 +8,7 @@ import java.util.List;
  * Created by admin on 2017/4/11.
  */
 
-public interface IFragmentThree extends BaseIProgress {
+public interface IFragmentThree extends BaseIProgress, BaseIToast {
 
     /**
      * 获取商品列表
@@ -20,6 +20,10 @@ public interface IFragmentThree extends BaseIProgress {
      */
     void stopRefresh();
 
-    void toGenerateOrderActivity();
+    void onAddOrderSuccess(String orderId);
+
+    void onClickDelGoodsByCartId(String cartId);
+
+    void onDelSuccess();
 
 }

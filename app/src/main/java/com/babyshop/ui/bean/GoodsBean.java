@@ -1,10 +1,12 @@
 package com.babyshop.ui.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by admin on 2017/4/11.
  */
 
-public class GoodsBean {
+public class GoodsBean implements Serializable {
     public String id;
     public String categoryid;
     public String name;

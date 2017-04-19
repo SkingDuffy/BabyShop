@@ -19,6 +19,7 @@ import com.babyshop.ui.bean.OrderBean;
 import com.babyshop.ui.presenter.OrderListPresenter;
 import com.babyshop.ui.presenter.OrderPresenter;
 import com.babyshop.ui.view.IOrderView;
+import com.babyshop.utils.LLog;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -47,6 +48,7 @@ public class OrderActivity extends BaseActivity implements IOrderView, SwipeRefr
     private void initPre(){
         initTitleBar("订单详情");
         orderBean = (OrderBean) getIntent().getSerializableExtra("orderBean");
+        LLog.e("-----orderBean--- " + orderBean.id + ","+orderBean.commodities.size()+"," + orderBean.commodities.get(0).name);
     }
 
     private void initView() {
@@ -65,7 +67,6 @@ public class OrderActivity extends BaseActivity implements IOrderView, SwipeRefr
         sr = (SwipeRefreshLayout) findViewById(R.id.swipe_layout);
         p.setRefreshColor(sr);
         sr.setOnRefreshListener(this);
-        onRefresh();
     }
 
     @Override

@@ -15,7 +15,6 @@
         <activity android:name=".ui.jeneral.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -24,7 +23,8 @@
             android:screenOrientation="portrait" />
 
         <activity android:name=".ui.main.HomeActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            android:launchMode="singleInstance"/>
 
         <activity android:name=".ui.jeneral.CommodityListActivity"
             android:screenOrientation="portrait" />
@@ -39,6 +39,9 @@
             android:screenOrientation="portrait" />
 
         <activity android:name=".ui.jeneral.AddressActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name=".ui.jeneral.OrderActivity"
             android:screenOrientation="portrait" />
 
     </application>
