@@ -27,23 +27,24 @@ import java.util.Map;
 public class CommPresenter {
 
     ICommView iCommView;
-    SharedPreferencesUtil shared;
     ToLoginBiz toLoginBiz;
+    String id, userid;
 
-    public CommPresenter(ICommView iCommView, SharedPreferencesUtil shared) {
+    public CommPresenter(ICommView iCommView, String id) {
         this.iCommView = iCommView;
-        this.shared = shared;
+        this.id = id;
         toLoginBiz = new ToLoginBiz();
+        SharedPreferencesUtil shared = SharedPreferencesUtil.getInstance();
+        userid = shared.getUserId();
     }
 
     /**
      * 获取商品
-     *
-     * @param url
      */
-    public void getComm(String url) {
+    public void getComm() {
+        String suffix = TextUtils.isEmpty(userid) ? "?id=" + id : "?id=" + id + "&userid=" + userid;
         iCommView.showProgress();
-        MyOkHttpUtils.get(url, new MyOkHttpUtils.ResultCallback<ResultCommBean>() {
+        MyOkHttpUtils.get(Url.COMMODITY + suffix, new MyOkHttpUtils.ResultCallback<ResultCommBean>() {
             @Override
             public void onSuccess(ResultCommBean response, int action) {
                 iCommView.dismissProgress();
@@ -60,30 +61,44 @@ public class CommPresenter {
     /**
      * 加入购物车
      */
-    public void putIntoCart(String id, String num) {
-        httpPostBiz(id, num);
+    public void putIntoCart(String num) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("num", num);
+        httpPostBiz(1, map);
     }
 
     /**
      * 加入收藏
      */
-    public void collect(String id) {
-        httpPostBiz(id, "");
+    public void collect(boolean hasCollect) {
+        if (!hasCollect) {
+            httpPostBiz(2, null);     //收藏
+        } else {
+            httpPostBiz(3, null);     //取消
+        }
+
     }
 
-    private void httpPostBiz(String id, String num) {
+    private void httpPostBiz(int type, Map<String, String> map) {
         if (toLoginBiz.isToLogin(iCommView))
             return;
         String url = "";
+        switch (type) {
+            case 1:
+                url = Url.ADD_CART;
+                break;
+            case 2:
+                url = Url.ADD_COLLECT;
+                break;
+            case 3:
+                url = Url.DEL_COLLECT;
+                break;
+        }
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
-        params.put("userid", shared.getUserId());
-        if (!TextUtils.isEmpty(num)) {
-            params.put("num", num);
-            url = Url.ADD_CART;
-        } else {
-            url = Url.ADD_COLLECT;
-        }
+        params.put("userid", userid);
+        if (map != null)
+            params.putAll(map);
         iCommView.showProgress();
         MyOkHttpUtils.post(url, params, new MyOkHttpUtils.ResultCallback<ResultBean>() {
             @Override

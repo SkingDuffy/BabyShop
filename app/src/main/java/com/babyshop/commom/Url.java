@@ -26,8 +26,6 @@ public class Url {
     public static final String COMMODITY = BASE + "/commodity/getCommodity";
     //添加到购物车
     public static final String ADD_CART = BASE + "/commodity/addShoppingcart";
-    //添加到收藏
-    public static final String ADD_COLLECT = BASE + "/commodity/addCollection";
     //购物车列表
     public static final String CART_LIST = BASE + "/commodity/getShoppingcart";
     //购物车结算 - 添加订单
@@ -36,6 +34,10 @@ public class Url {
     public static final String MY_ORDER = BASE + "/order/getOrderList";
     //浏览历史
     public static final String MY_HISTORY = BASE + "/commodity/getUserCommodity";
+    //添加到收藏
+    public static final String ADD_COLLECT = BASE + "/commodity/addCollection";
+    //取消收藏
+    public static final String DEL_COLLECT = BASE + "/commodity/deleteCollection";
     //收藏列表
     public static final String MY_COLLECT = BASE + "/commodity/getCollection";
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +34,8 @@ public class CommodityActivity extends BaseActivity implements ICommView {
     private ImageCycleView imageCycleView;
     private TextView tv_name, tv_id, tv_price, tv_descri;
     private String id, userid;
+    private Button bt_collect;
+    private boolean hasCollect;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,12 +47,9 @@ public class CommodityActivity extends BaseActivity implements ICommView {
     }
 
     private void initParams() {
-        SharedPreferencesUtil shared = SharedPreferencesUtil.getInstance();
-        p = new CommPresenter(this, shared);
-
         Intent i = getIntent();
         id = i.getStringExtra("id");
-        userid = shared.getString(Constant.U_ID, "");
+        p = new CommPresenter(this, id);
     }
 
     private void initView() {
@@ -58,12 +58,13 @@ public class CommodityActivity extends BaseActivity implements ICommView {
         tv_id = (TextView) findViewById(R.id.tv_comm_id);
         tv_price = (TextView) findViewById(R.id.tv_comm_price);
         tv_descri = (TextView) findViewById(R.id.tv_comm_description);
-        String suffix = TextUtils.isEmpty(userid) ? "?id=" + id : "?id=" + id + "&userid=" + userid;
-        p.getComm(Url.COMMODITY + suffix);
+        bt_collect = (Button) findViewById(R.id.bt_comm_collect);
+        p.getComm();
     }
 
     @Override
     public void getComm(GoodsBean bean) {
+//        hasCollect = bean.    //初始化收藏标志
         tv_name.setText(bean.name);
         tv_id.setText("商品编号：" + bean.id);
         tv_price.setText("¥" + bean.price);
@@ -84,14 +85,20 @@ public class CommodityActivity extends BaseActivity implements ICommView {
      * 加入购物车
      */
     public void clickPutIntoCart(View v) {
-        p.putIntoCart(id, "1");
+        p.putIntoCart("1");
     }
 
     /**
      * 收藏
      */
     public void clickCollect(View v) {
-        p.collect(id);
+        if (hasCollect){
+            bt_collect.setText("取消收藏");
+        } else {
+            bt_collect.setText("收藏");
+        }
+        hasCollect = !hasCollect;
+        p.collect(hasCollect);
     }
 
     @Override

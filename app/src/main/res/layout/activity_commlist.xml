@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_base"
     android:orientation="vertical">
 
     <include layout="@layout/title_bar" />
@@ -15,8 +16,8 @@
             android:id="@+id/rv_commlist"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical"
-            android:fadeScrollbars="true"/>
+            android:fadeScrollbars="true"
+            android:scrollbars="vertical" />
     </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

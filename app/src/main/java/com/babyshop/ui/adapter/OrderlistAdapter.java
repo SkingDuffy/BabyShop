@@ -25,9 +25,14 @@ public class OrderlistAdapter extends BaseRecyclerAdapter<OrderlistAdapter.MyHol
         this.list = list;
     }
 
+    public void setData(List<OrderBean> list){
+        this.list = list;
+        notifyDataSetChanged();
+    }
+
     @Override
     public OrderlistAdapter.MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MyHolder(LayoutInflater.from(context).inflate(R.layout.item_order, parent, false));
+        return new MyHolder(LayoutInflater.from(context).inflate(R.layout.item_orderlist, parent, false));
     }
 
     @Override
@@ -35,11 +40,12 @@ public class OrderlistAdapter extends BaseRecyclerAdapter<OrderlistAdapter.MyHol
         OrderBean bean = list.get(position);
         holder.tv_id.setText("订单编号：" + bean.id);
         holder.tv_price.setText("¥" + bean.totalprice);
+        initItemClick(holder, bean);
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return list.size();
     }
 
     class MyHolder extends RecyclerView.ViewHolder{
