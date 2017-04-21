@@ -44,7 +44,7 @@ public class CommlistAdapter0 extends BaseRecyclerAdapter<CommlistAdapter0.MyVie
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         GoodsBean bean = commlist.get(position);
-        GlideUtil.setUrl(context, Url.IMG + bean.pic, holder.iv);
+        GlideUtil.setUrl(context, Url.IMG + bean.pic.split(",")[0], holder.iv);
         holder.tv_name.setText(bean.name);
         holder.tv_price.setText("¥" + bean.price);
         initItemClick(holder, bean);

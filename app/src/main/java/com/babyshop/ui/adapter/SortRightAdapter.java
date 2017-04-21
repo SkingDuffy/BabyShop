@@ -43,7 +43,7 @@ public class SortRightAdapter extends BaseRecyclerAdapter<SortRightAdapter.MyHol
         GoodsBean bean = list.get(position);
         holder.name.setText(bean.name);
         holder.price.setText("¥" + bean.price);
-        GlideUtil.setUrl(context, Url.IMG + bean.pic, holder.iv);
+        GlideUtil.setUrl(context, Url.IMG + bean.pic.split(",")[0], holder.iv);
         initItemClick(holder, bean);
     }
 

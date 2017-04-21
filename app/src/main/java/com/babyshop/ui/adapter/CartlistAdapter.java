@@ -1,7 +1,6 @@
 package com.babyshop.ui.adapter;
 
 import android.content.Context;
-import android.support.annotation.IntegerRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -50,7 +49,7 @@ public class CartlistAdapter extends BaseRecyclerAdapter<CartlistAdapter.MyHolde
         holder.name.setText(bean.name);
         holder.price.setText("¥" + bean.price);
         holder.tPrice.setText("¥" + Float.valueOf(bean.price) * Integer.valueOf(bean.num));
-        GlideUtil.setUrl(context, Url.IMG + bean.pic, holder.iv);
+        GlideUtil.setUrl(context, Url.IMG + bean.pic.split(",")[0], holder.iv);
         initItemClick(holder, bean);
         holder.rl.setOnClickListener(new View.OnClickListener() {
             @Override

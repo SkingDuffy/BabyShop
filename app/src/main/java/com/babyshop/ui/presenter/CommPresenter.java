@@ -133,9 +133,11 @@ public class CommPresenter {
      */
     public List<BaseBannerBean> getBannerList(GoodsBean bean) {
         List<BaseBannerBean> bannerList = new ArrayList<>();
-        BaseBannerBean b1 = new BaseBannerBean();
-        b1.setUrl(Url.IMG + bean.pic);
-        bannerList.add(b1);
+        for (String img : bean.pic.split(",")){
+            BaseBannerBean b = new BaseBannerBean();
+            b.setUrl(Url.IMG + img);
+            bannerList.add(b);
+        }
         return bannerList;
     }
 

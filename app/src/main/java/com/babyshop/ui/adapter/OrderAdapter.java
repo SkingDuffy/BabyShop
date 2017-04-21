@@ -1,7 +1,6 @@
 package com.babyshop.ui.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.ViewHolder;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +14,6 @@ import com.babyshop.commom.Url;
 import com.babyshop.ui.bean.CartGoodsBean;
 import com.babyshop.ui.bean.OrderBean;
 import com.babyshop.utils.GlideUtil;
-import com.babyshop.utils.LLog;
 
 /**
  * Created by admin on 2017/4/18.
@@ -70,7 +68,7 @@ public class OrderAdapter extends BaseRecyclerAdapter<ViewHolder> {
             CartGoodsBean bean = orderBean.commodities.get(position - 1);
             holder2.name.setText(bean.name);
             holder2.price.setText("¥" + bean.price);
-            GlideUtil.setUrl(context, Url.IMG + bean.pic, holder2.iv);
+            GlideUtil.setUrl(context, Url.IMG + bean.pic.split(",")[0], holder2.iv);
             holder2.rl.setVisibility(View.GONE);
             initItemClick(holder, bean);
         }
