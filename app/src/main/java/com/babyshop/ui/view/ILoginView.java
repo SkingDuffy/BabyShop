@@ -10,8 +10,6 @@ public interface ILoginView extends BaseIProgress, BaseIToast {
 
     void loginSuccess(UserBean userBean);
 
-    void registerResponse(String url);
-
     void showProgress(String text);
 
 }

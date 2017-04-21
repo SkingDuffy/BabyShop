@@ -3,7 +3,6 @@ package com.babyshop.ui.jeneral;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -11,8 +10,6 @@ import android.widget.TextView;
 
 import com.babyshop.R;
 import com.babyshop.commom.BaseActivity;
-import com.babyshop.commom.Constant;
-import com.babyshop.commom.Url;
 import com.babyshop.ui.bean.GoodsBean;
 import com.babyshop.ui.main.FragmentThree;
 import com.babyshop.ui.presenter.CommPresenter;
@@ -21,9 +18,6 @@ import com.babyshop.utils.GlideUtil;
 import com.babyshop.utils.SharedPreferencesUtil;
 import com.babyshop.widget.cycleImage.BaseBannerBean;
 import com.babyshop.widget.cycleImage.ImageCycleView;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by admin on 2017/4/12.
@@ -34,7 +28,7 @@ public class CommodityActivity extends BaseActivity implements ICommView {
     private CommPresenter p;
     private ImageCycleView imageCycleView;
     private TextView tv_name, tv_id, tv_price, tv_descri;
-    private String id, userid;
+    private String id;
     private Button bt_collect;
     private boolean hasCollect;
 
@@ -60,12 +54,24 @@ public class CommodityActivity extends BaseActivity implements ICommView {
         tv_price = (TextView) findViewById(R.id.tv_comm_price);
         tv_descri = (TextView) findViewById(R.id.tv_comm_description);
         bt_collect = (Button) findViewById(R.id.bt_comm_collect);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         p.getComm();
     }
 
     @Override
     public void getComm(GoodsBean bean) {
-//        hasCollect = bean.    //初始化收藏标志
+        if (SharedPreferencesUtil.getInstance().hasLogin()){
+            hasCollect = bean.isCollection;
+            if (hasCollect) {
+                bt_collect.setText("取消收藏");
+            } else {
+                bt_collect.setText("收藏");
+            }
+        }
         tv_name.setText(bean.name);
         tv_id.setText("商品编号：" + bean.id);
         tv_price.setText("¥" + bean.price);

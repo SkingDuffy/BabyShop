@@ -18,7 +18,6 @@ import com.babyshop.ui.bean.UserBean;
 import com.babyshop.ui.main.HomeActivity;
 import com.babyshop.ui.presenter.LoginPresenter;
 import com.babyshop.ui.view.ILoginView;
-import com.babyshop.utils.LLog;
 import com.babyshop.utils.SharedPreferencesUtil;
 
 /**
@@ -53,8 +52,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
         dele_pwd = (ImageView) findViewById(R.id.iv_dele_pwd);
         et_name.addTextChangedListener(this);
         et_pwd.addTextChangedListener(this);
-        iv_name.setOnClickListener(this);
-        iv_pwd.setOnClickListener(this);
         dele_name.setOnClickListener(this);
         dele_pwd.setOnClickListener(this);
     }
@@ -122,18 +119,13 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener,
      * 注册事件
      */
     public void clickRegister(View v){
-
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 
     @Override
     public void loginSuccess(UserBean userBean) {
         setResult(RESULT_OK, new Intent(this, HomeActivity.class));
         finish();
-    }
-
-    @Override
-    public void registerResponse(String url) {
-
     }
 
 }

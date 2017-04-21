@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.babyshop.R;
-import com.babyshop.commom.Url;
 import com.babyshop.ui.adapter.CartlistAdapter;
 import com.babyshop.ui.adapter.OnItemClickListener;
 import com.babyshop.ui.bean.CartGoodsBean;
@@ -22,7 +21,6 @@ import com.babyshop.ui.jeneral.CommodityActivity;
 import com.babyshop.ui.jeneral.GenerateOrderActivity;
 import com.babyshop.ui.presenter.FragmentThreePresenter;
 import com.babyshop.ui.view.IFragmentThree;
-import com.babyshop.utils.LLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -86,9 +84,12 @@ public class FragmentThree extends Fragment implements IFragmentThree, SwipeRefr
 
     @Override
     public void getCartList(List<CartGoodsBean> cartlist) {
-        this.cartlist = cartlist;
-        if (cartlist.size() == 0)
+        if (cartlist.size() == 0 || cartlist == null){
+            this.cartlist.clear();
             return;
+        } else {
+            this.cartlist = cartlist;
+        }
         tv_num.setText("" + p.getTotalNum(cartlist));
         tv_price.setText("¥" + p.getTotalPrice(cartlist));
         tv_score.setText("18");

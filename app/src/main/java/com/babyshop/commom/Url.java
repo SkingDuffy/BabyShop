@@ -13,7 +13,9 @@ public class Url {
     //登陆
     public static final String LOGIN = BASE + "/login";
     //注册
-    public static final String REGIST = BASE + "/regist";
+    public static final String REGIST = BASE + "/login/regist";
+    //收货地址
+    public static final String ADDRESS = BASE + "/login/getAddress";
     //首页轮播
     public static final String HOME_BANNER = BASE + "/commodity/findAdCommodities";
     //商品列表 type:0 限时抢购，1 促销快报，2 新品上架，3 热卖单品，4 推荐品牌
@@ -34,6 +36,8 @@ public class Url {
     public static final String SETTLEMENT_CART = BASE + "/order/addOrder";
     //订单列表
     public static final String MY_ORDER = BASE + "/order/getOrderList";
+    //删除订单
+    public static final String DEL_ORDER = BASE + "/order/-------";
     //浏览记录
     public static final String MY_HISTORY = BASE + "/commodity/getUserCommodity";
     //删除记录

@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.babyshop.R;
 import com.babyshop.ui.jeneral.AddressActivity;
@@ -19,7 +18,6 @@ import com.babyshop.ui.jeneral.LoginActivity;
 import com.babyshop.ui.jeneral.OrderListActivity;
 import com.babyshop.ui.presenter.FragmentFourPresenter;
 import com.babyshop.ui.view.IFragmentFour;
-import com.babyshop.utils.LLog;
 import com.babyshop.utils.SharedPreferencesUtil;
 
 /**
@@ -64,7 +62,7 @@ public class FragmentFour extends Fragment implements View.OnClickListener, IFra
         if (shared.hasLogin()){
             loginSuccess();
         } else {
-            loginSuccess();
+            logoutSuccess();
         }
     }
 
@@ -88,14 +86,6 @@ public class FragmentFour extends Fragment implements View.OnClickListener, IFra
             case R.id.bt_logout:
                 p.logout();
                 break;
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 0x1 && resultCode == getActivity().RESULT_OK){
-            loginSuccess();
         }
     }
 

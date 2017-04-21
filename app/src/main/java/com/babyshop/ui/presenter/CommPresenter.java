@@ -2,18 +2,15 @@ package com.babyshop.ui.presenter;
 
 import android.text.TextUtils;
 
-import com.babyshop.commom.Constant;
 import com.babyshop.commom.Url;
 import com.babyshop.ui.bean.GoodsBean;
 import com.babyshop.ui.bean.ResultBean;
 import com.babyshop.ui.bean.ResultCommBean;
-import com.babyshop.ui.bean.TestResultBean;
 import com.babyshop.ui.biz.ToLoginBiz;
 import com.babyshop.ui.view.ICommView;
 import com.babyshop.utils.MyOkHttpUtils;
 import com.babyshop.utils.SharedPreferencesUtil;
 import com.babyshop.widget.cycleImage.BaseBannerBean;
-import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,21 +25,22 @@ public class CommPresenter {
 
     ICommView iCommView;
     ToLoginBiz toLoginBiz;
-    String id, userid;
+    String id;
+    SharedPreferencesUtil shared;
 
     public CommPresenter(ICommView iCommView, String id) {
         this.iCommView = iCommView;
         this.id = id;
         toLoginBiz = new ToLoginBiz();
-        SharedPreferencesUtil shared = SharedPreferencesUtil.getInstance();
-        userid = shared.getUserId();
+        shared = SharedPreferencesUtil.getInstance();
     }
 
     /**
      * 获取商品
      */
     public void getComm() {
-        String suffix = TextUtils.isEmpty(userid) ? "?id=" + id : "?id=" + id + "&userid=" + userid;
+        String suffix = TextUtils.isEmpty(shared.getUserId())
+                ? "?id=" + id : "?id=" + id + "&userid=" + shared.getUserId();
         iCommView.showProgress();
         MyOkHttpUtils.get(Url.COMMODITY + suffix, new MyOkHttpUtils.ResultCallback<ResultCommBean>() {
             @Override
@@ -97,7 +95,7 @@ public class CommPresenter {
         }
         Map<String, String> params = new HashMap<>();
         params.put("id", id);
-        params.put("userid", userid);
+        params.put("userid", shared.getUserId());
         if (map != null)
             params.putAll(map);
         iCommView.showProgress();

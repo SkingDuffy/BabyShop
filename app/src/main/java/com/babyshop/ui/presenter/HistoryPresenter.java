@@ -25,7 +25,7 @@ public class HistoryPresenter {
         iHistoryView.showProgress();
         Map<String, String> params = new HashMap<>();
         params.put("userid", SharedPreferencesUtil.getInstance().getUserId());
-        MyOkHttpUtils.post(Url.DEL_HISTORY, params,new MyOkHttpUtils.ResultCallback<ResultBean>() {
+        MyOkHttpUtils.post(Url.DEL_HISTORY, params, new MyOkHttpUtils.ResultCallback<ResultBean>() {
             @Override
             public void onSuccess(ResultBean response, int action) {
                 iHistoryView.dismissProgress();

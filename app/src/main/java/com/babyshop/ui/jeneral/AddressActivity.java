@@ -9,6 +9,9 @@ import android.widget.TextView;
 import com.babyshop.R;
 import com.babyshop.commom.BaseActivity;
 import com.babyshop.commom.Constant;
+import com.babyshop.commom.Url;
+import com.babyshop.ui.bean.ResultAddrBean;
+import com.babyshop.utils.MyOkHttpUtils;
 import com.babyshop.utils.SharedPreferencesUtil;
 import com.babyshop.widget.MyDialog;
 
@@ -38,12 +41,7 @@ public class AddressActivity extends BaseActivity implements View.OnClickListene
     private void initView() {
         tv_addr = (TextView) findViewById(R.id.tv_address);
         tv_addr.setOnClickListener(this);
-        addr = shared.getString(Constant.U_ADDRESS, "");
-        if (TextUtils.isEmpty(addr)){
-            tv_addr.setText("点击添加地址");
-        } else {
-            tv_addr.setText(addr);
-        }
+        getAddrOnNet();
     }
 
     @Override
@@ -51,14 +49,62 @@ public class AddressActivity extends BaseActivity implements View.OnClickListene
         switch (view.getId()){
             case R.id.tv_title_right:
                 String newAddr = tv_addr.getText().toString();
+                if (TextUtils.isEmpty(newAddr)){
+                    showToast("地址不能为空！");
+                    return;
+                }
                 if (!addr.equals(newAddr)){
-                    shared.putString(Constant.U_ADDRESS, newAddr);
+                    setAddrOnNet(newAddr);
                 }
                 finish();
                 break;
             case R.id.tv_address:
                 modifyAddress();
                 break;
+        }
+    }
+
+    private void getAddrOnNet(){
+        setAddrOnNet("");
+    }
+
+
+    private void setAddrOnNet(final String addr){
+        String suffix;
+        if (TextUtils.isEmpty(addr)){
+            suffix = "?userid=" + shared.getUserId();
+        } else {
+            suffix = "?userid=" + shared.getUserId() + "&address=" + addr;
+        }
+        showProgress();
+        MyOkHttpUtils.get(Url.ADDRESS + suffix, new MyOkHttpUtils.ResultCallback<ResultAddrBean>() {
+            @Override
+            public void onSuccess(ResultAddrBean response, int action) {
+                dismissProgress();
+                if (TextUtils.isEmpty(addr)){
+                    shared.putString(Constant.U_ADDRESS, response.data);
+                } else {
+                    if (response.flag){
+                        shared.putString(Constant.U_ADDRESS, addr);
+                    }
+                    showToast(response.message);
+                }
+                initAddress();
+            }
+
+            @Override
+            public void onFailure(Exception e) {
+                dismissProgress();
+            }
+        });
+    }
+
+    private void initAddress(){
+        addr = shared.getString(Constant.U_ADDRESS, "");
+        if (TextUtils.isEmpty(addr)){
+            tv_addr.setText("点击添加地址");
+        } else {
+            tv_addr.setText(addr);
         }
     }
 

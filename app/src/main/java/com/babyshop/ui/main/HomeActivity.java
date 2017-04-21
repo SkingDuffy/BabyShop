@@ -16,7 +16,6 @@ import com.babyshop.commom.BaseActivity;
 import com.babyshop.ui.jeneral.LoginActivity;
 import com.babyshop.ui.presenter.HomePresenter;
 import com.babyshop.ui.view.IHomeView;
-import com.babyshop.utils.LLog;
 
 public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener, IHomeView {
     private HomePresenter p = new HomePresenter(this);
@@ -54,7 +53,7 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
 
-                switch (motionEvent.getAction()){
+                switch (motionEvent.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         return p.isToLogin();
                 }
@@ -105,8 +104,17 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (fragmentFour != null)
+                fragmentFour.loginSuccess();
+        }
+    }
+
+    @Override
     public void toLoginActivity() {
-        startActivity(new Intent(this, LoginActivity.class));
+        startActivityForResult(new Intent(this, LoginActivity.class), 0x1);
     }
 
 }

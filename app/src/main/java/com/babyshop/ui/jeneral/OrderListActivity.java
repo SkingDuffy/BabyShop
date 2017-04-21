@@ -8,6 +8,7 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.babyshop.R;
 import com.babyshop.commom.BaseActivity;
@@ -36,8 +37,20 @@ public class OrderListActivity extends BaseActivity implements IOrderlistView, S
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_commlist);
-        initTitleBar("订单列表");
+        initPre();
         initView();
+    }
+
+    private void initPre() {
+        initTitleBar("订单列表");
+        TextView tv_right = (TextView) findViewById(R.id.tv_title_right);
+        tv_right.setVisibility(View.VISIBLE);
+        tv_right.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                p.delOrderList();
+            }
+        });
     }
 
     private void initView() {
@@ -67,6 +80,11 @@ public class OrderListActivity extends BaseActivity implements IOrderlistView, S
     @Override
     public void getOrderList(List<OrderBean> orderList) {
         adapter.setData(list = orderList);
+    }
+
+    @Override
+    public void onDelSuccess() {
+        onRefresh();
     }
 
     @Override

@@ -15,4 +15,5 @@ public class GoodsBean implements Serializable {
     public String describe;
     public String createtime;
     public String categoryname;
+    public boolean isCollection;
 }

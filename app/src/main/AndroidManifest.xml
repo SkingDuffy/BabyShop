@@ -22,6 +22,9 @@
         <activity android:name=".ui.jeneral.LoginActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".ui.jeneral.RegisterActivity"
+            android:screenOrientation="portrait" />
+
         <activity android:name=".ui.main.HomeActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleInstance"/>

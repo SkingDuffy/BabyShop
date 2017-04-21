@@ -8,9 +8,11 @@ import java.util.List;
  * Created by admin on 2017/4/18.
  */
 
-public interface IOrderlistView extends BaseIProgress {
+public interface IOrderlistView extends BaseIProgress, BaseIToast {
 
     void getOrderList(List<OrderBean> orderList);
+
+    void onDelSuccess();
 
     void stopRefresh();
 

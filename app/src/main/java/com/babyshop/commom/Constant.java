@@ -15,4 +15,7 @@ public class Constant {
     // 用户地址
     public static final String U_ADDRESS = "u_address";
 
+    // 是否有商品添加到购物车
+    public static final String HAS_ADD_GOODS = "has_add_goods";
+
 }
