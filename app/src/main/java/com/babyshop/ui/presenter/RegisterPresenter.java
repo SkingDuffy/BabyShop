@@ -6,9 +6,6 @@ import com.babyshop.ui.view.IRegisterView;
 import com.babyshop.utils.GsonUtil;
 import com.babyshop.utils.MyOkHttpUtils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by admin on 2017/4/13.
  */
@@ -23,9 +20,11 @@ public class RegisterPresenter {
 
     public void register(String name, String pwd, String phone) {
         iRegisterView.showProgress();
-        Map<String, String> params = new HashMap<>();
-        params.put("user", GsonUtil.getInstance().bean2Json(new UserInfo(name, pwd, phone)));
-        MyOkHttpUtils.post(Url.REGIST, params, new MyOkHttpUtils.ResultCallback<ResultBean>() {
+//        Map<String, String> params = new HashMap<>();
+//        params.put("name", name);
+//        params.put("password", pwd);
+//        params.put("phone", name);
+        MyOkHttpUtils.postString(Url.REGIST, GsonUtil.getInstance().bean2Json(new UserInfo(name, pwd, phone)), new MyOkHttpUtils.ResultCallback<ResultBean>() {
             @Override
             public void onSuccess(ResultBean response, int action) {
                 iRegisterView.dismissProgress();

@@ -66,11 +66,7 @@ public class CommodityActivity extends BaseActivity implements ICommView {
     public void getComm(GoodsBean bean) {
         if (SharedPreferencesUtil.getInstance().hasLogin()){
             hasCollect = bean.isCollection;
-            if (hasCollect) {
-                bt_collect.setText("取消收藏");
-            } else {
-                bt_collect.setText("收藏");
-            }
+            setCollectBtnText();
         }
         tv_name.setText(bean.name);
         tv_id.setText("商品编号：" + bean.id);
@@ -113,11 +109,7 @@ public class CommodityActivity extends BaseActivity implements ICommView {
     public void onCollectSuccess() {
         bt_collect.setClickable(true);
         hasCollect = !hasCollect;
-        if (hasCollect) {
-            bt_collect.setText("取消收藏");
-        } else {
-            bt_collect.setText("收藏");
-        }
+        setCollectBtnText();
     }
 
     @Override
@@ -128,6 +120,14 @@ public class CommodityActivity extends BaseActivity implements ICommView {
     @Override
     public void toLoginActivity() {
         startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    private void setCollectBtnText(){
+        if (hasCollect) {
+            bt_collect.setText("取消收藏");
+        } else {
+            bt_collect.setText("收藏");
+        }
     }
 
 }

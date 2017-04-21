@@ -37,7 +37,7 @@ public class Url {
     //订单列表
     public static final String MY_ORDER = BASE + "/order/getOrderList";
     //删除订单
-    public static final String DEL_ORDER = BASE + "/order/-------";
+    public static final String DEL_ORDER = BASE + "/order/deleteOrderList";
     //浏览记录
     public static final String MY_HISTORY = BASE + "/commodity/getUserCommodity";
     //删除记录
