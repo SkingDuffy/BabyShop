@@ -86,14 +86,12 @@ public class FragmentThree extends Fragment implements IFragmentThree, SwipeRefr
     public void getCartList(List<CartGoodsBean> cartlist) {
         if (cartlist.size() == 0 || cartlist == null){
             this.cartlist.clear();
-            return;
+            setDefaultText();
         } else {
             this.cartlist = cartlist;
+            setListText(cartlist);
         }
-        tv_num.setText("" + p.getTotalNum(cartlist));
-        tv_price.setText("¥" + p.getTotalPrice(cartlist));
-        tv_score.setText("18");
-        adapter.setData(cartlist);
+        adapter.setData(this.cartlist);
     }
 
     @Override
@@ -108,9 +106,19 @@ public class FragmentThree extends Fragment implements IFragmentThree, SwipeRefr
                 .putExtra("orderBean", orderBean));
         cartlist.clear();
         adapter.setData(cartlist);
+        setDefaultText();
+    }
+
+    private void setDefaultText(){
         tv_num.setText("--");
         tv_price.setText("--");
         tv_score.setText("--");
+    }
+
+    private void setListText(List<CartGoodsBean> cartlist){
+        tv_num.setText("" + p.getTotalNum(cartlist));
+        tv_price.setText("¥" + p.getTotalPrice(cartlist));
+        tv_score.setText("18");
     }
 
     @Override

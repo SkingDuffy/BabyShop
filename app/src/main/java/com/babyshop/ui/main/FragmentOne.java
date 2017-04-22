@@ -11,13 +11,12 @@ import android.widget.ImageView;
 
 import com.babyshop.R;
 import com.babyshop.commom.Url;
+import com.babyshop.ui.bean.BannerToCycleBean;
 import com.babyshop.ui.jeneral.CommodityActivity;
 import com.babyshop.ui.presenter.FragmentOnePresenter;
 import com.babyshop.ui.view.IFragmentOne;
-import com.babyshop.ui.bean.BannerToCycleBean;
 import com.babyshop.utils.GlideUtil;
 import com.babyshop.widget.cycleImage.ImageCycleView;
-import com.jaeger.library.StatusBarUtil;
 
 import java.util.List;
 
@@ -49,7 +48,6 @@ public class FragmentOne extends Fragment implements IFragmentOne, View.OnClickL
             view.findViewById(itemIds[i]).setOnClickListener(this);
         }
     }
-
 
     @Override
     public void onClick(View view) {

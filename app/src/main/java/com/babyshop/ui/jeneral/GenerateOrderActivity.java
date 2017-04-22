@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.babyshop.R;
 import com.babyshop.commom.BaseActivity;
 import com.babyshop.ui.bean.OrderBean;
-import com.babyshop.ui.main.HomeActivity;
 
 /**
  * Created by admin on 2017/4/15.
@@ -41,7 +40,7 @@ public class GenerateOrderActivity extends BaseActivity {
     }
 
     public void clickToShopping(View view){
-        startActivity(new Intent(this, HomeActivity.class));
+        finish();
     }
 
     public void clickToOrder(View view){
