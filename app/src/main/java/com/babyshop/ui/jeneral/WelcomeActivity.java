@@ -69,6 +69,7 @@ public class WelcomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(WelcomeActivity.this, HomeActivity.class));
+                finish();
             }
         });
         setBannerIndicator();
