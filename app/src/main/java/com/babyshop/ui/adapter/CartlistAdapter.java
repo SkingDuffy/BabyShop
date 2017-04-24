@@ -48,6 +48,7 @@ public class CartlistAdapter extends BaseRecyclerAdapter<CartlistAdapter.MyHolde
         final CartGoodsBean bean = list.get(position);
         holder.name.setText(bean.name);
         holder.price.setText("¥" + bean.price);
+        holder.num.setText("数量：" + bean.num);
         holder.tPrice.setText("¥" + Float.valueOf(bean.price) * Integer.valueOf(bean.num));
         GlideUtil.setUrl(context, Url.IMG + bean.pic.split(",")[0], holder.iv);
         initItemClick(holder, bean);
@@ -65,7 +66,7 @@ public class CartlistAdapter extends BaseRecyclerAdapter<CartlistAdapter.MyHolde
     }
 
     class MyHolder extends RecyclerView.ViewHolder {
-        TextView name, price, tPrice;
+        TextView name, price, num, tPrice;
         ImageView iv;
         LinearLayout rl;
 
@@ -73,6 +74,7 @@ public class CartlistAdapter extends BaseRecyclerAdapter<CartlistAdapter.MyHolde
             super(view);
             this.name = (TextView) view.findViewById(R.id.tv_cart_name);
             this.price = (TextView) view.findViewById(R.id.tv_cart_price);
+            this.num = (TextView) view.findViewById(R.id.tv_cart_num);
             this.tPrice = (TextView) view.findViewById(R.id.tv_cart_total_price);
             this.iv = (ImageView) view.findViewById(R.id.iv_img);
             this.rl = (LinearLayout) view.findViewById(R.id.rl_cart_dele);
