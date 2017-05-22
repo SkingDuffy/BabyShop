@@ -12,10 +12,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.babyshop.R;
-import com.babyshop.ui.jeneral.AddressActivity;
-import com.babyshop.ui.jeneral.CommodityListActivity;
-import com.babyshop.ui.jeneral.LoginActivity;
-import com.babyshop.ui.jeneral.OrderListActivity;
+import com.babyshop.ui.general.AddressActivity;
+import com.babyshop.ui.general.CommodityListActivity;
+import com.babyshop.ui.general.LoginActivity;
+import com.babyshop.ui.general.OrderListActivity;
 import com.babyshop.ui.presenter.FragmentFourPresenter;
 import com.babyshop.ui.view.IFragmentFour;
 import com.babyshop.utils.SharedPreferencesUtil;

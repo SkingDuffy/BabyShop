@@ -18,11 +18,9 @@ import com.babyshop.ui.adapter.SortLeftAdapter;
 import com.babyshop.ui.adapter.SortRightAdapter;
 import com.babyshop.ui.bean.GoodsBean;
 import com.babyshop.ui.bean.SortBean;
-import com.babyshop.ui.jeneral.CommodityActivity;
+import com.babyshop.ui.general.CommodityActivity;
 import com.babyshop.ui.presenter.FragmentTwoPresenter;
 import com.babyshop.ui.view.IFragmentTwo;
-import com.babyshop.utils.LLog;
-import com.jaeger.library.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;

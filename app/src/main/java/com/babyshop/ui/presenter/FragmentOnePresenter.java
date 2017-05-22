@@ -2,14 +2,12 @@ package com.babyshop.ui.presenter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.widget.Toast;
 
 import com.babyshop.commom.Url;
-import com.babyshop.ui.jeneral.CommodityListActivity;
+import com.babyshop.ui.general.CommodityListActivity;
 import com.babyshop.ui.view.IFragmentOne;
 import com.babyshop.ui.bean.ResultBannerBean;
 import com.babyshop.ui.bean.BannerToCycleBean;
-import com.babyshop.utils.LLog;
 import com.babyshop.utils.MyOkHttpUtils;
 
 /**

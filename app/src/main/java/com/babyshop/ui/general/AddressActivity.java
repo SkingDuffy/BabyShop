@@ -1,4 +1,4 @@
-package com.babyshop.ui.jeneral;
+package com.babyshop.ui.general;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

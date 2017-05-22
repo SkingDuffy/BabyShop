@@ -13,7 +13,7 @@ import android.widget.RadioGroup;
 
 import com.babyshop.R;
 import com.babyshop.commom.BaseActivity;
-import com.babyshop.ui.jeneral.LoginActivity;
+import com.babyshop.ui.general.LoginActivity;
 import com.babyshop.ui.presenter.HomePresenter;
 import com.babyshop.ui.view.IHomeView;
 

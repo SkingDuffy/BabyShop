@@ -1,4 +1,4 @@
-package com.babyshop.ui.jeneral;
+package com.babyshop.ui.general;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,16 +13,12 @@ import com.babyshop.R;
 import com.babyshop.commom.BaseActivity;
 import com.babyshop.ui.adapter.OnItemClickListener;
 import com.babyshop.ui.adapter.OrderAdapter;
-import com.babyshop.ui.adapter.OrderlistAdapter;
 import com.babyshop.ui.bean.CartGoodsBean;
 import com.babyshop.ui.bean.OrderBean;
-import com.babyshop.ui.presenter.OrderListPresenter;
 import com.babyshop.ui.presenter.OrderPresenter;
 import com.babyshop.ui.view.IOrderView;
 import com.babyshop.utils.LLog;
 
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

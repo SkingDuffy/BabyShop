@@ -1,4 +1,4 @@
-package com.babyshop.ui.jeneral;
+package com.babyshop.ui.general;
 
 import android.content.Context;
 import android.content.Intent;

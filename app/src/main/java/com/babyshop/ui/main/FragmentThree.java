@@ -17,8 +17,8 @@ import com.babyshop.ui.adapter.CartlistAdapter;
 import com.babyshop.ui.adapter.OnItemClickListener;
 import com.babyshop.ui.bean.CartGoodsBean;
 import com.babyshop.ui.bean.OrderBean;
-import com.babyshop.ui.jeneral.CommodityActivity;
-import com.babyshop.ui.jeneral.GenerateOrderActivity;
+import com.babyshop.ui.general.CommodityActivity;
+import com.babyshop.ui.general.GenerateOrderActivity;
 import com.babyshop.ui.presenter.FragmentThreePresenter;
 import com.babyshop.ui.view.IFragmentThree;
 

@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import com.babyshop.R;
 import com.babyshop.commom.Url;
 import com.babyshop.ui.bean.BannerToCycleBean;
-import com.babyshop.ui.jeneral.CommodityActivity;
+import com.babyshop.ui.general.CommodityActivity;
 import com.babyshop.ui.presenter.FragmentOnePresenter;
 import com.babyshop.ui.view.IFragmentOne;
 import com.babyshop.utils.GlideUtil;

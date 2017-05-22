@@ -1,18 +1,8 @@
 package com.babyshop.ui.presenter;
 
-import android.content.Context;
-import android.content.Intent;
-
-import com.babyshop.commom.Url;
-import com.babyshop.ui.bean.BannerToCycleBean;
-import com.babyshop.ui.bean.ResultBannerBean;
 import com.babyshop.ui.bean.ResultCommlistBean;
 import com.babyshop.ui.bean.ResultSortBean;
-import com.babyshop.ui.bean.SortBean;
-import com.babyshop.ui.jeneral.CommodityListActivity;
-import com.babyshop.ui.view.IFragmentOne;
 import com.babyshop.ui.view.IFragmentTwo;
-import com.babyshop.utils.LLog;
 import com.babyshop.utils.MyOkHttpUtils;
 
 /**

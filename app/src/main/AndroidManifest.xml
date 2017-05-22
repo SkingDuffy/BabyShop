@@ -12,39 +12,39 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.jeneral.WelcomeActivity">
+        <activity android:name=".ui.general.WelcomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.jeneral.LoginActivity"
+        <activity android:name=".ui.general.LoginActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.jeneral.RegisterActivity"
+        <activity android:name=".ui.general.RegisterActivity"
             android:screenOrientation="portrait" />
 
         <activity android:name=".ui.main.HomeActivity"
             android:screenOrientation="portrait"
             android:launchMode="singleInstance"/>
 
-        <activity android:name=".ui.jeneral.CommodityListActivity"
+        <activity android:name=".ui.general.CommodityListActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.jeneral.CommodityActivity"
+        <activity android:name=".ui.general.CommodityActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.jeneral.GenerateOrderActivity"
+        <activity android:name=".ui.general.GenerateOrderActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.jeneral.OrderListActivity"
+        <activity android:name=".ui.general.OrderListActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.jeneral.AddressActivity"
+        <activity android:name=".ui.general.AddressActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name=".ui.jeneral.OrderActivity"
+        <activity android:name=".ui.general.OrderActivity"
             android:screenOrientation="portrait" />
 
     </application>
